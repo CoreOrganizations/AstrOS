@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![AstrOS Logo](https://via.placeholder.com/400x120/2B3A67/FFFFFF?text=AstrOS) 
+![AstrOS Logo](docs/5d579937-7bef-47af-a4a6-fe0854607b65.png) 
 
 **The World's First AI-Integrated Operating System**
 
