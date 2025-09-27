@@ -1,10 +1,10 @@
 # Contributing to AstrOS 🚀
 
-Welcome to the AstrOS community! We're building the AI-integrated operating system, and we're excited to have you join us on this journey to make computing as intuitive as talking to FRIDAY or Jarvis.
+Welcome to the AstrOS community! We're building the AI-integrated operating system, and we're excited to have you join us on this journey.
 
 ## 🌟 Our Vision
 
-AstrOS aims to transform how humans interact with computers through natural language and AI-powered automation, while maintaining privacy, security, and the open-source principles that make great software possible.
+AstrOS aims to transform how humans interact with computers through natural language and AI-powered automation, while maintaining privacy, security, and the open-source principles that make great OS possible.
 
 ---
 
@@ -14,7 +14,7 @@ AstrOS aims to transform how humans interact with computers through natural lang
 
 Before you begin, ensure you have:
 
-- **Ubuntu 22.04 LTS or 24.04 LTS** (recommended for development)
+- **Ubuntu 24.04 LTS** (recommended for development)
 - **Python 3.12+** (Ubuntu 24.04 default)
 - **Git** and basic command line knowledge
 - **Docker** (for containerized development)
