@@ -11,7 +11,7 @@
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-24.04%20LTS-orange.svg)](https://ubuntu.com/)
 [![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org/)
 [![Contributors Welcome](https://img.shields.io/badge/Contributors-Welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Discord](https://img.shields.io/discord/YOUR_DISCORD_ID?color=7289da&label=Discord&logo=discord&logoColor=white)]([https://discord.gg/aiastros](https://discord.gg/9qQstuyt)
+[![Discord](https://img.shields.io/discord/YOUR_DISCORD_ID?color=7289da&label=Discord&logo=discord&logoColor=white)](https://discord.gg/9qQstuyt)
 
 [🌟 **Get Started**](https://github.com/AstrOS-Project/astros-core) • [📖 **Documentation**](https://docs.astros.org) • [💬 **Community**]([https://discord.gg/astros](https://discord.gg/9qQstuyt) • [🤝 **Contributing**](CONTRIBUTING.md)
 
