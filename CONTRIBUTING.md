@@ -52,8 +52,8 @@ Before you begin, ensure you have:
    ```
 
 4. **Join Our Community**
-   - 💬 [Discord Server](https://discord.gg/astros) - Real-time chat and support
-   - 🌐 [Matrix Room](https://matrix.to/#/#astros:matrix.org) - Open protocol chat
+   - 💬 [Discord Server] - Real-time chat and support
+   - 🌐 [Matrix Room] - Open protocol chat
    - 📋 [GitHub Discussions](https://github.com/orgs/AstrOS-Project/discussions) - Long-form discussions
 
 ---
