@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![AstrOS Logo](docs/5d579937-7bef-47af-a4a6-fe0854607b65.png) 
+![AstrOS Logo](Local/5d579937-7bef-47af-a4a6-fe0854607b65.png)
 
 **The World's First AI-Integrated Operating System**
 
@@ -41,19 +41,19 @@ AstrOS is an open-source, AI-first Linux operating system built on Ubuntu LTS th
 <td width="50%">
 
 ### 🔥 Core Components
-- **[astros-core](https://github.com/AstrOS-Project/astros-core)** - Main AI agent and system orchestrator
-- **[astros-plugins](https://github.com/AstrOS-Project/astros-plugins)** - Official plugin collection
-- **[astros-ui](https://github.com/AstrOS-Project/astros-ui)** - User interfaces and desktop integration
-- **[astros-ubuntu-iso](https://github.com/AstrOS-Project/astros-ubuntu-iso)** - Ubuntu-based ISO builder
+- **[astros-core]** - Main AI agent and system orchestrator
+- **[astros-plugins]** - Official plugin collection
+- **[astros-ui]** - User interfaces and desktop integration
+- **[astros-ubuntu-iso]** - Ubuntu-based ISO builder
 
 </td>
 <td width="50%">
 
 ### 📚 Documentation & Tools
-- **[astros-docs](https://github.com/AstrOS-Project/astros-docs)** - Official documentation
-- **[astros-website](https://github.com/AstrOS-Project/astros-website)** - Project website source
-- **[astros-ci](https://github.com/AstrOS-Project/astros-ci)** - Shared CI/CD workflows
-- **[community](https://github.com/AstrOS-Project/community)** - Community guidelines and discussions
+- **[astros-docs]** - Official documentation
+- **[astros-website]** - Project website source
+- **[astros-ci]** - Shared CI/CD workflows
+- **[community]** - Community guidelines and discussions
 
 </td>
 </tr>
