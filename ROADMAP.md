@@ -210,7 +210,7 @@ Each layer is implemented as modular Debian packages with clear interfaces, ensu
   - Long-term support planning
   - Security update processes
 
-**Success Criteria**: Stable AstroS 1.0 with active community adoption
+**Success Criteria**: Stable AstrOS 1.0 with active community adoption
 
 ---
 
