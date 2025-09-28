@@ -1,13 +1,21 @@
 # 🚀 Getting Started with AstrOS
 
-Welcome to AstrOS - the world's first AI-integrated operating system! This guide will help you get up and running quickly.
+Welcome to AstrOS - the world's first AI-integrated operating system! Featuring **API-First Architecture** with **GPT-OSS-20B** for intelligent responses to any question or command.
+
+## ✨ What's New: Complete AI Agent Ready!
+
+🎉 **Zero Setup Required!** AstrOS comes pre-configured with:
+- ✅ GPT-OSS-20B (microsoft/wizardlm-2-8x22b) API access 
+- ✅ Complete dependency management
+- ✅ Interactive and demo modes
+- ✅ Full AI capabilities out of the box
 
 ## 📋 Prerequisites
 
-- **Python 3.10+** (Python 3.12+ recommended)
+- **Python 3.10+** (Python 3.12+ recommended)  
 - **Git** for cloning the repository
-- **Virtual environment** support (venv, conda, etc.)
-- **Optional**: OpenAI or OpenRouter API key for enhanced AI features
+- **Internet connection** for AI model access
+- **✅ Everything else is auto-installed!**
 
 ## 🎯 Quick Setup (5 Minutes)
 
@@ -29,26 +37,65 @@ venv\Scripts\activate     # Windows
 pip install -e .
 ```
 
-### 2. Choose Your Mode
+### 2. Launch the Complete AI Agent (One Command!)
 
-#### 🆓 Option A: Local Mode (No API Key Required)
+#### 🚀 **Start AstrOS** (Clean & Simple)
 ```bash
-# Set environment variables for local mode
-export ASTROS_ENABLE_OPENAI=false
-export ASTROS_ENABLE_LOCAL_NLP=true
+# Interactive mode - chat with GPT-OSS-20B
+python astros.py interactive
 
-# Run AstrOS
-python demo_enhanced.py
+# Quick demo - see AI capabilities  
+python astros.py demo
+
+# Or just run and choose mode
+python astros.py
 ```
 
-#### 🚀 Option B: Enhanced Mode with API (Recommended)
+#### � **Quick Demo** (See AI capabilities)
 ```bash
-# Get API key from OpenRouter (cheaper) or OpenAI
-# OpenRouter: https://openrouter.ai/keys
-# OpenAI: https://platform.openai.com/api-keys
+# Run 5 sample queries to see GPT-OSS-20B in action
+python run_complete_agent.py demo
+```
 
-# For OpenRouter (recommended - cheaper):
-export ASTROS_OPENAI_API_KEY="sk-or-v1-your-openrouter-key"
+#### 🔧 **Advanced Options**
+```bash
+# Manual mode selection
+python run_complete_agent.py
+# Then choose: 1=Interactive, 2=Demo, 3=Server
+
+# Legacy test scripts (if needed)
+python test_quick_api.py
+python showcase_gpt_oss_20b.py interactive
+```
+
+### 🎮 What You Can Ask the AI
+
+Once running, try these example commands:
+
+**🧮 Mathematics & Calculations:**
+- "Calculate 247 * 139 + 567 step by step"
+- "What's the derivative of x³ + 2x² - 5x + 7?"
+- "Solve this equation: 2x + 5 = 15"
+
+**💻 Programming & Code:**
+- "Write a Python function to find prime numbers"
+- "Explain the difference between async and sync programming"
+- "Debug this code: [paste your code]"
+
+**🧠 Knowledge & Explanations:**
+- "Explain quantum computing in simple terms"
+- "What are the differences between AI, ML, and Deep Learning?"
+- "How does blockchain technology work?"
+
+**🎨 Creative & Problem Solving:**
+- "Write a short story about an AI learning emotions"
+- "Give me 5 creative ways to organize digital files"
+- "Help me brainstorm ideas for a mobile app"
+
+**🔧 System & Technical Help:**
+- "How do I speed up my computer?"
+- "What are the best practices for password security?"
+- "Help me understand network protocols"
 export ASTROS_OPENAI_BASE_URL="https://openrouter.ai/api/v1"
 export ASTROS_OPENAI_MODEL="openai/gpt-4"
 export ASTROS_ENABLE_OPENAI=true
@@ -63,12 +110,38 @@ python demo_enhanced.py
 
 ## 🎬 Your First AstrOS Experience
 
-### Try These Commands:
-- `"hello there!"` - Greet your AI assistant
-- `"calculate 25 * 47"` - Perform calculations
-- `"what can you help me with?"` - Learn about capabilities
-- `"show system information"` - Get system details
-- `"help me understand AstrOS"` - Get guidance
+### 🎯 **What You'll See (GPT-OSS-20B Demo)**
+```
+🚀 AstrOS Complete AI Agent
+==================================================
+🤖 Powered by GPT-OSS-20B (microsoft/wizardlm-2-8x22b)
+🌐 API Endpoint: OpenRouter
+🧠 Features: API-First Intelligence + Local Tools
+==================================================
+
+🔑 API Status: ✅ READY
+🤖 Model: microsoft/wizardlm-2-8x22b
+
+✅ Agent ready!
+
+💡 Try these commands:
+   • 'Explain quantum computing in simple terms'
+   • 'Write a Python function to sort numbers'
+   • 'Calculate 247 * 139 + 567 step by step'
+   • 'What can you help me with?'
+   • 'Hello, how are you?'
+
+🌟 You: Hello! What can you do?
+🤖 AstrOS: Hello! I'm AstrOS, an intelligent AI assistant designed to help you with a wide range of tasks...
+   📊 [567 tokens, openai_api]
+```
+
+### 🧪 **Try These Example Commands:**
+- **"Hello! What are you and what can you do?"** - Get a comprehensive introduction
+- **"Calculate 25 * 47 + 123"** - See intelligent math with step-by-step reasoning  
+- **"Explain artificial intelligence in simple terms"** - Get clear explanations
+- **"Write a Python function to find prime numbers"** - Code generation and programming help
+- **"Help me organize my digital photos efficiently"** - Creative problem solving
 
 ### Expected Output:
 ```

@@ -9,6 +9,8 @@ from typing import Dict, List, Any, Optional, Callable
 from dataclasses import dataclass
 from enum import Enum
 
+# Plugin imports removed to avoid circular imports
+
 
 class PluginStatus(Enum):
     """Plugin status enumeration"""

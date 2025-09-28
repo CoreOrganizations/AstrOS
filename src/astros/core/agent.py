@@ -28,6 +28,7 @@ class AstrOSAgent:
         self.plugin_manager = None
         self.response_generator = None
         self.openai_client = None
+        self.voice_processor = None
         
         # Enhanced conversation context
         self.conversation_context = ConversationContext()
@@ -87,15 +88,20 @@ class AstrOSAgent:
             
             self.logger.info("Initializing enhanced AI components...")
             
-            # Initialize OpenAI client if enabled
-            if self.config.ai.enable_openai and not self.fallback_mode:
+            # Initialize OpenAI client if API key is available (auto-enable)
+            from ..config.api_config import APIConfig
+            if APIConfig.is_configured() and not self.fallback_mode:
                 try:
                     from ..ai.openai_client import get_openai_client
                     self.openai_client = get_openai_client()
-                    self.logger.info("OpenAI client initialized")
+                    # Auto-enable OpenAI when API key is present
+                    self.config.ai.enable_openai = True
+                    self.logger.info("OpenAI client initialized and auto-enabled")
                 except Exception as e:
                     self.logger.warning(f"Failed to initialize OpenAI client: {e}")
                     self.fallback_mode = True
+            else:
+                self.logger.info("OpenAI API key not configured - staying in local mode")
             
             # Initialize NLP processor with OpenAI integration
             self.nlp_processor = NLPProcessor()
@@ -106,6 +112,14 @@ class AstrOSAgent:
             self.response_generator = ResponseGenerator()
             if hasattr(self.response_generator, 'set_openai_client') and self.openai_client:
                 self.response_generator.set_openai_client(self.openai_client)
+            
+            # Initialize voice processor
+            try:
+                from ..ai.voice_processor import get_voice_processor
+                self.voice_processor = get_voice_processor()
+                self.logger.info("Voice processor initialized")
+            except Exception as e:
+                self.logger.warning(f"Voice processor not available: {e}")
             
             # Initialize plugin manager
             self.plugin_manager = PluginManager()
@@ -144,13 +158,19 @@ class AstrOSAgent:
             }
     
     async def _process_with_ai(self, command: str) -> Dict[str, Any]:
-        """Process command using enhanced AI and NLP with OpenAI integration"""
+        """Process command using enhanced AI and NLP with OpenAI integration - API FIRST"""
         try:
-            # Enhanced processing with OpenAI if available
-            if self.openai_client and self.config.ai.enable_openai:
-                return await self._process_with_openai(command)
+            # PRIORITY 1: Always try OpenAI/API first if available
+            if self.openai_client and self.openai_client.is_available():
+                try:
+                    return await self._process_with_openai_general(command)
+                except Exception as e:
+                    self.logger.warning(f"API processing failed: {e}")
+                    if not self.config.ai.fallback_to_local:
+                        raise e
+                    self.logger.info("Falling back to local processing")
             
-            # Process with local NLP
+            # FALLBACK: Process with local NLP only if API fails or not available
             processed_input = await self.nlp_processor.process(command)
             
             # Enhanced conversation context management
@@ -210,10 +230,85 @@ class AstrOSAgent:
             self.logger.error(f"AI processing error: {e}")
             return {
                 'success': False,
-                'message': f"AI processing error: {e}",
-                'timestamp': datetime.now().isoformat(),
+                'message': f"OpenAI processing error: {e}",
+                'timestamp': datetime.now().isoformat(), 
                 'agent': self.config.agent_name
             }
+    
+    async def _process_with_openai_general(self, command: str) -> Dict[str, Any]:
+        """Process any command/question using OpenAI GPT - API FIRST approach"""
+        try:
+            # Get available capabilities from plugin manager
+            capabilities = []
+            if self.plugin_manager:
+                capabilities = [
+                    "mathematical calculations and arithmetic operations",
+                    "file management and organization tasks", 
+                    "system information and monitoring",
+                    "general conversation and questions",
+                    "code assistance and programming help",
+                    "research and information lookup",
+                    "creative writing and brainstorming"
+                ]
+            
+            # Generate intelligent response using GPT for ANY input
+            gpt_response = await self.openai_client.generate_general_response(
+                user_input=command,
+                context=self.conversation_context,
+                system_capabilities=capabilities
+            )
+            
+            # Update conversation context
+            self.conversation_context.messages.append({"role": "user", "content": command})
+            self.conversation_context.messages.append({"role": "assistant", "content": gpt_response.content})
+            
+            # Limit conversation history
+            if len(self.conversation_context.messages) > self.config.ai.conversation_memory_size * 2:
+                self.conversation_context.messages = self.conversation_context.messages[-self.config.ai.conversation_memory_size * 2:]
+            
+            # Optional: Try to execute local tools if GPT suggests it
+            result_data = None
+            intent_name = "general_query"  # Default intent
+            confidence = gpt_response.confidence
+            
+            # Simple keyword detection for potential local tool execution
+            command_lower = command.lower()
+            if any(word in command_lower for word in ["calculate", "compute", "math", "+", "-", "*", "/"]):
+                if self.plugin_manager:
+                    try:
+                        result = await self.plugin_manager.execute_intent("calculation", {"expression": command})
+                        if result.success:
+                            result_data = result.data
+                            intent_name = "calculation"
+                    except:
+                        pass  # GPT response is still valid
+            
+            elif any(word in command_lower for word in ["file", "folder", "directory", "list"]):
+                intent_name = "file_management"
+            elif any(word in command_lower for word in ["system", "info", "memory", "cpu"]):
+                intent_name = "system_control"
+            elif any(word in command_lower for word in ["hello", "hi", "hey", "greeting"]):
+                intent_name = "greeting"
+            elif any(word in command_lower for word in ["help", "what can you do"]):
+                intent_name = "help"
+            
+            return {
+                'success': True,
+                'message': gpt_response.content,
+                'timestamp': datetime.now().isoformat(),
+                'agent': self.config.agent_name,
+                'intent': intent_name,
+                'confidence': confidence,
+                'entities': [],  # GPT handles entity extraction internally
+                'data': result_data,
+                'model': gpt_response.model,
+                'tokens_used': gpt_response.usage.get('total_tokens', 0) if gpt_response.usage else 0,
+                'source': 'openai_api'
+            }
+            
+        except Exception as e:
+            self.logger.error(f"OpenAI general processing error: {e}")
+            raise
     
     async def _process_with_openai(self, command: str) -> Dict[str, Any]:
         """Process command using OpenAI GPT for enhanced intelligence"""
@@ -347,6 +442,94 @@ class AstrOSAgent:
                 'timestamp': datetime.now().isoformat(),
                 'agent': self.config.agent_name
             }
+    
+    async def process_voice_command(self, duration: int = 5) -> Dict[str, Any]:
+        """Process a voice command - listen, transcribe, and respond"""
+        self.logger.info("Processing voice command...")
+        
+        if not self.voice_processor or not self.voice_processor.can_record_audio():
+            return {
+                'success': False,
+                'message': "Voice input not available. Please check microphone permissions and audio setup.",
+                'timestamp': datetime.now().isoformat(),
+                'agent': self.config.agent_name
+            }
+        
+        try:
+            # Record and transcribe audio
+            transcribed_text = await self.voice_processor.listen_and_transcribe(duration)
+            
+            if not transcribed_text:
+                return {
+                    'success': False,
+                    'message': "Could not understand audio input. Please try again.",
+                    'timestamp': datetime.now().isoformat(),
+                    'agent': self.config.agent_name
+                }
+            
+            self.logger.info(f"Transcribed voice input: {transcribed_text}")
+            
+            # Process the transcribed text as a regular command
+            response = await self.process_command(transcribed_text)
+            
+            # Add voice-specific metadata
+            response['voice_input'] = transcribed_text
+            response['input_method'] = 'voice'
+            
+            # Speak the response if TTS is available
+            if self.voice_processor and self.voice_processor.can_speak() and response['success']:
+                try:
+                    await self.voice_processor.speak(response['message'])
+                    response['spoken'] = True
+                except Exception as e:
+                    self.logger.warning(f"Failed to speak response: {e}")
+                    response['spoken'] = False
+            else:
+                response['spoken'] = False
+            
+            return response
+            
+        except Exception as e:
+            self.logger.error(f"Voice command processing error: {e}")
+            return {
+                'success': False,
+                'message': f"Voice processing error: {e}",
+                'timestamp': datetime.now().isoformat(),
+                'agent': self.config.agent_name
+            }
+    
+    async def speak_response(self, text: str) -> bool:
+        """Speak a text response"""
+        if not self.voice_processor or not self.voice_processor.can_speak():
+            self.logger.warning("Text-to-speech not available")
+            return False
+        
+        try:
+            return await self.voice_processor.speak(text)
+        except Exception as e:
+            self.logger.error(f"Speech error: {e}")
+            return False
+    
+    async def get_voice_status(self) -> Dict[str, Any]:
+        """Get voice processing status"""
+        status = {
+            'voice_available': False,
+            'stt_available': False,
+            'tts_available': False,
+            'recording_available': False,
+            'openai_voice': False
+        }
+        
+        if self.voice_processor:
+            status.update({
+                'voice_available': True,
+                'stt_available': self.voice_processor.is_available(),
+                'tts_available': self.voice_processor.can_speak(),
+                'recording_available': self.voice_processor.can_record_audio(),
+                'openai_voice': self.voice_processor.is_available()
+            })
+        
+        return status
     
     def _update_conversation_context(self, command: str, processed_input=None) -> None:
         """Update conversation context with new interaction"""

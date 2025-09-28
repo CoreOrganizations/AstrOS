@@ -15,6 +15,8 @@ import tiktoken
 from openai import AsyncOpenAI
 
 from ..core.config_enhanced import get_config, ConversationContext
+from ..config.api_config import APIConfig
+from .response_customizer import ResponseCustomizer
 
 logger = logging.getLogger(__name__)
 
@@ -36,18 +38,19 @@ class OpenAIClient:
         self.config = get_config()
         self.client: Optional[AsyncOpenAI] = None
         self.token_encoder = None
+        self.response_customizer = ResponseCustomizer()
         self._setup_client()
     
     def _setup_client(self):
         """Initialize OpenAI client with support for OpenRouter and custom endpoints"""
         try:
-            api_key = self.config.get_openai_api_key()
+            # Use centralized API configuration
+            api_key = APIConfig.get_api_key()
             if not api_key:
                 logger.warning("OpenAI API key not configured")
                 return
             
-            # Support for custom base URLs (e.g., OpenRouter)
-            base_url = os.getenv("ASTROS_OPENAI_BASE_URL")
+            base_url = APIConfig.get_base_url()
             
             client_kwargs = {
                 "api_key": api_key,
@@ -57,18 +60,20 @@ class OpenAIClient:
             
             if base_url:
                 client_kwargs["base_url"] = base_url
-                logger.info(f"Using custom OpenAI endpoint: {base_url}")
+                logger.info(f"Using OpenRouter endpoint: {base_url}")
             
             self.client = AsyncOpenAI(**client_kwargs)
             
             # Initialize token encoder for the model
             try:
-                self.token_encoder = tiktoken.encoding_for_model(self.config.openai.model)
+                model_name = APIConfig.get_model_name()
+                self.token_encoder = tiktoken.encoding_for_model(model_name)
             except:
-                # Fallback to cl100k_base encoding
+                # Fallback to cl100k_base encoding for custom models
                 self.token_encoder = tiktoken.get_encoding("cl100k_base")
             
-            logger.info(f"OpenAI client initialized with model: {self.config.openai.model}")
+            logger.info(f"OpenAI client initialized with model: {APIConfig.get_model_name()}")
+            logger.info(f"API Configuration: {APIConfig.get_config_summary()}")
             
         except Exception as e:
             logger.error(f"Failed to initialize OpenAI client: {e}")
@@ -83,7 +88,7 @@ class OpenAIClient:
     
     def is_available(self) -> bool:
         """Check if OpenAI client is available"""
-        return self.client is not None and self.config.ai.enable_openai
+        return self.client is not None and APIConfig.is_configured()
     
     async def generate_response(
         self, 
@@ -104,10 +109,10 @@ class OpenAIClient:
                 messages = self._trim_messages(messages, self.config.ai.context_window // 2)
             
             response = await self.client.chat.completions.create(
-                model=self.config.openai.model,
+                model=APIConfig.get_model_name(),
                 messages=messages,
-                max_tokens=self.config.openai.max_tokens,
-                temperature=self.config.openai.temperature,
+                max_tokens=APIConfig.get_max_tokens(),
+                temperature=APIConfig.get_temperature(),
                 presence_penalty=0.1,
                 frequency_penalty=0.1
             )
@@ -171,6 +176,64 @@ class OpenAIClient:
             logger.error(f"GPT intent classification error: {e}")
             raise
     
+    async def generate_general_response(
+        self,
+        user_input: str,
+        context: Optional[ConversationContext] = None,
+        system_capabilities: Optional[List[str]] = None
+    ) -> GPTResponse:
+        """Generate a response to any general question or command using GPT"""
+        if not self.is_available():
+            raise RuntimeError("OpenAI client not available - API key required")
+        
+        # Build comprehensive system prompt
+        capabilities = system_capabilities or [
+            "mathematical calculations",
+            "file management operations", 
+            "system information queries",
+            "general conversation and questions",
+            "code assistance and programming help",
+            "creative writing and brainstorming",
+            "research and information lookup"
+        ]
+        
+        base_system_prompt = f"""You are AstrOS, an intelligent AI assistant with advanced capabilities.
+        
+        You can help with: {', '.join(capabilities)}
+        
+        Guidelines:
+        - Provide helpful, accurate, and engaging responses
+        - Be conversational but professional
+        - If the user asks about calculations, provide the mathematical solution
+        - If asked about files or system operations, explain what you would do
+        - For general questions, provide comprehensive but concise answers
+        - Always be helpful and try to understand the user's intent
+        - If you need to perform system operations, mention what actions you would take
+        
+        Current context: This is a conversation with a user who is interacting with the AstrOS AI assistant system."""
+        
+        # Customize system prompt based on user input
+        system_prompt = self.response_customizer.customize_system_prompt(
+            user_input, base_system_prompt
+        )
+        
+        try:
+            response = await self.generate_response(
+                user_input=user_input,
+                context=context,
+                system_prompt=system_prompt
+            )
+            
+            # Apply response customization filters
+            response.content = self.response_customizer.apply_response_filters(
+                response.content, user_input
+            )
+            
+            return response
+        except Exception as e:
+            logger.error(f"Failed to generate general response: {e}")
+            raise
+
     async def enhance_response(
         self, 
         basic_response: str, 

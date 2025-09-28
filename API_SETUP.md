@@ -2,7 +2,15 @@
 
 ## Overview
 
-AstrOS now supports powerful GPT integration for enhanced AI capabilities! Contributors can bring their own API keys to unlock advanced features while maintaining full privacy control and local fallback capabilities.
+AstrOS now features an **API-First Architecture** powered by GPT-OSS-20B! The system comes pre-configured with a working API key for immediate use, but contributors can bring their own API keys for enhanced control and customization.
+
+### ✨ What's New: GPT-OSS-20B Integration
+
+- 🚀 **Pre-configured** with microsoft/wizardlm-2-8x22b model via OpenRouter
+- 🤖 **API-First processing** - all queries go to LLM first
+- 🧠 **Intelligent responses** to any question or command
+- 🔧 **Smart tool integration** - AI decides when to use local tools
+- 🎯 **Response customization** system for fine-tuning outputs
 
 ## 🔑 API Provider Options
 
@@ -19,6 +27,25 @@ AstrOS now supports powerful GPT integration for enhanced AI capabilities! Contr
 - **Setup**: OpenRouter account (supports multiple providers)
 
 ## 🛠️ Setup Instructions
+
+### Method 0: Use Pre-configured GPT-OSS-20B (Ready to Use!) ⭐
+
+AstrOS comes with a working GPT-OSS-20B configuration:
+
+```bash
+# Test the pre-configured API
+python test_quick_api.py
+
+# Or start interactive mode
+python demo_api_first.py interactive
+```
+
+**Features Available:**
+- ✅ GPT-OSS-20B (microsoft/wizardlm-2-8x22b) model
+- ✅ OpenRouter API integration
+- ✅ 4000 token responses
+- ✅ Response customization system
+- ✅ Automatic fallback to local processing
 
 ### Method 1: OpenAI Direct Setup
 

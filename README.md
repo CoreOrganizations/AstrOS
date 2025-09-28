@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![AstrOS Logo](Local/5d579937-7bef-47af-a4a6-fe0854607b65.png)]
+![AstrOS Logo](Local/5d579937-7bef-47af-a4a6-fe0854607b65.png)
 
 **The World's First AI-Integrated Operating System**
 
@@ -25,10 +25,12 @@ AstrOS is an open-source, AI-first Linux operating system built on Ubuntu LTS th
 
 ### ✨ Key Features
 
-- 🗣️ **Natural Language Control** - Control your system through voice or text commands
-- 🤖 **GPT-Powered Intelligence** - Bring your own OpenAI/OpenRouter API key for enhanced AI
+- � **API-First AI Architecture** - Powered by GPT-OSS-20B (microsoft/wizardlm-2-8x22b) for intelligent responses
+- �🗣️ **Natural Language Control** - Ask any question or give any command in natural language
+- 🤖 **GPT-Powered Intelligence** - OpenRouter integration with response customization system
+- 🧠 **Smart Local Tools** - Local execution combined with AI-generated intelligent responses  
 - 🔒 **Privacy-First Design** - Your data stays local, you control what goes to the cloud
-- 🧩 **Plugin Ecosystem** - Extensible architecture with community-driven plugins
+- 🧩 **Plugin Ecosystem** - Extensible architecture with AI-enhanced community plugins
 - 🛡️ **Built on Ubuntu LTS** - Rock-solid foundation with excellent hardware support
 - 🌐 **Open Source** - Fully auditable, community-driven development
 - 💰 **Cost-Effective** - Use OpenRouter for cheaper API access than direct OpenAI
