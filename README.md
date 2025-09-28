@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![AstrOS Logo](Local/5d579937-7bef-47af-a4a6-fe0854607b65.png)
+[![AstrOS Logo](Local/5d579937-7bef-47af-a4a6-fe0854607b65.png)]
 
 **The World's First AI-Integrated Operating System**
 
@@ -13,7 +13,7 @@
 [![Contributors Welcome](https://img.shields.io/badge/Contributors-Welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Discord](https://img.shields.io/discord/9qQstuyt?color=7289da&label=Discord&logo=discord&logoColor=white)](https://discord.gg/9qQstuyt)
 
-[🌟 **Get Started**](https://github.com/AstrOS-Project/astros-core) • [📖 **Documentation**](https://docs.astros.org) • [�️ **Roadmap**](ROADMAP.md) • [�💬 **Community**](https://discord.gg/9qQstuyt) • [🤝 **Contributing**](CONTRIBUTING.md)
+[🚀 **Get Started**](GETTING_STARTED.md) • [🔑 **API Setup**](API_SETUP.md) • [📖 **Documentation**](https://docs.astros.org) • [🗺️ **Roadmap**](ROADMAP.md) • [� **Community**](https://discord.gg/9qQstuyt) • [🤝 **Contributing**](CONTRIBUTING_API.md)
 
 </div>
 
@@ -26,11 +26,12 @@ AstrOS is an open-source, AI-first Linux operating system built on Ubuntu LTS th
 ### ✨ Key Features
 
 - 🗣️ **Natural Language Control** - Control your system through voice or text commands
-- 🤖 **Intelligent Automation** - AI learns your patterns and automates repetitive tasks
+- 🤖 **GPT-Powered Intelligence** - Bring your own OpenAI/OpenRouter API key for enhanced AI
 - 🔒 **Privacy-First Design** - Your data stays local, you control what goes to the cloud
 - 🧩 **Plugin Ecosystem** - Extensible architecture with community-driven plugins
 - 🛡️ **Built on Ubuntu LTS** - Rock-solid foundation with excellent hardware support
 - 🌐 **Open Source** - Fully auditable, community-driven development
+- 💰 **Cost-Effective** - Use OpenRouter for cheaper API access than direct OpenAI
 
 ---
 
@@ -61,7 +62,36 @@ AstrOS is an open-source, AI-first Linux operating system built on Ubuntu LTS th
 
 ---
 
-## 🚀 Quick Start
+## � API Setup for Enhanced AI Features
+
+AstrOS supports powerful GPT integration! Contributors can bring their own API keys for enhanced capabilities:
+
+### 📋 Quick API Setup
+
+**Option 1: OpenRouter (Recommended - Cheaper) 💰**
+```bash
+# Sign up at https://openrouter.ai (cheaper than OpenAI direct)
+export ASTROS_OPENAI_API_KEY="sk-or-v1-your-openrouter-key"
+export ASTROS_OPENAI_BASE_URL="https://openrouter.ai/api/v1"
+export ASTROS_OPENAI_MODEL="openai/gpt-4"
+export ASTROS_ENABLE_OPENAI=true
+```
+
+**Option 2: OpenAI Direct**
+```bash
+# Get API key from https://platform.openai.com/api-keys
+export ASTROS_OPENAI_API_KEY="sk-your-openai-key"
+export ASTROS_ENABLE_OPENAI=true
+```
+
+**📖 [Complete API Setup Guide →](API_SETUP.md)**
+
+### 🆓 Local Mode (No API Required)
+AstrOS works great without any API keys using local AI processing!
+
+---
+
+## �🚀 Quick Start
 
 ### For Users
 ```bash
@@ -76,10 +106,23 @@ sudo apt update && sudo apt install astros-desktop
 ### For Developers
 ```bash
 # Clone and set up development environment
-git clone https://github.com/AstrOS-Project/astros-core.git
-cd astros-core
-./scripts/setup-dev.sh
-python -m astros.agent
+git clone https://github.com/CoreOrganizations/AstrOS.git
+cd AstrOS
+
+# Set up Python environment
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# or venv\Scripts\activate  # Windows
+
+# Install dependencies
+pip install -e .
+
+# Optional: Add your API key for enhanced AI features
+export ASTROS_OPENAI_API_KEY="your-key-here"  # OpenAI or OpenRouter
+export ASTROS_ENABLE_OPENAI=true
+
+# Run AstrOS
+python demo_enhanced.py
 ```
 
 ---
@@ -190,6 +233,9 @@ graph TB
 
 We're building the future of computing, and we need your help! AstrOS is a community-driven project welcoming contributors of all skill levels.
 
+### 🔑 Contributors: Bring Your Own API Key
+Contributors can enhance AstrOS with their own OpenAI or OpenRouter API keys for advanced testing and development. See our [API Setup Guide](API_SETUP.md) and [Contributing Guide](CONTRIBUTING_API.md) for details.
+
 ### 🎯 Ways to Contribute
 
 <table>
@@ -231,10 +277,11 @@ We're building the future of computing, and we need your help! AstrOS is a commu
 
 ### 📋 Getting Started
 
-1. **Read our [Contributing Guide](CONTRIBUTING.md)** - Essential information for new contributors
-2. **Join our [Discord Community](https://discord.gg/astros)** - Chat with maintainers and other contributors  
-3. **Check the [Development Roadmap](ROADMAP.md)** - See what we're working on and our project phases
-4. **Pick an Issue** - Start with issues labeled [`good first issue`](https://github.com/search?q=org%3AAstrOS-Project+label%3A%22good+first+issue%22&type=issues)
+1. **[Quick Start Guide](GETTING_STARTED.md)** - Set up AstrOS in 5 minutes
+2. **[API Setup Guide](API_SETUP.md)** - Configure OpenAI/OpenRouter for enhanced AI
+3. **[Contributing Guide](CONTRIBUTING_API.md)** - Essential information for new contributors
+4. **Join our [Discord Community](https://discord.gg/astros)** - Chat with maintainers and other contributors  
+5. **Pick an Issue** - Start with issues labeled [`good first issue`](https://github.com/search?q=org%3ACorOrganizations+label%3A%22good+first+issue%22&type=issues)
 
 ---
 
@@ -305,7 +352,7 @@ AstrOS is released under the [Apache License 2.0](LICENSE), which means:
 
 We take security seriously. If you discover a security vulnerability, please:
 - **DO NOT** create a public GitHub issue
-- Email us at: **security@astros.org**
+- Email us at: **aiastros2025@gmail.com**
 - Include detailed reproduction steps
 - We'll acknowledge within 48 hours
 

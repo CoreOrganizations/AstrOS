@@ -21,7 +21,7 @@ If you discover a security vulnerability, please help us maintain the security o
 
 ### 📧 Contact Information
 
-**Primary Contact**: security@astros.org
+**Primary Contact**: aiastros2025@gmail.com
 
 **PGP Key Fingerprint**: `ABCD 1234 5678 9012 3456 7890 ABCD EF12 3456 7890`
 
@@ -80,7 +80,6 @@ We appreciate security researchers who help improve AstrOS security:
 
 - **Security Acknowledgments**: Listed in our security hall of fame
 - **CVE Credits**: Proper attribution in CVE disclosures
-- **Swag**: AstrOS security researcher swag package
 - **Early Access**: Preview access to security-related features
 
 ## 🔐 Security Measures
@@ -96,10 +95,13 @@ We appreciate security researchers who help improve AstrOS security:
 ### Technical Security Features
 
 #### AI Module Security
+- **API Key Security**: Secure handling of OpenAI/OpenRouter API keys
 - **Sandboxing**: AI components run in isolated environments
 - **Permission Model**: Granular permissions for system access
 - **Input Filtering**: Malicious prompt detection and filtering
 - **Output Validation**: AI responses are validated before execution
+- **Local-First**: Privacy-preserving local AI processing by default
+- **Rate Limiting**: Built-in protection against API abuse
 
 #### System Integration Security
 - **Code Signing**: All packages and updates are cryptographically signed
@@ -143,14 +145,23 @@ We appreciate security researchers who help improve AstrOS security:
 - Hardware vulnerabilities (report to hardware vendors)
 - Social engineering attacks
 
-## 🛠️ Security Best Practices for Users
+### 🛠️ Security Best Practices for Users
 
 ### For End Users
 1. **Keep Updated**: Install security updates promptly
-2. **Review Permissions**: Regularly audit AI component permissions
-3. **Use Strong Authentication**: Enable strong passwords and 2FA where available
-4. **Monitor Activity**: Review system logs for unusual activity
-5. **Backup Data**: Maintain secure backups of important data
+2. **Secure API Keys**: Use environment variables, never commit keys to code
+3. **Review Permissions**: Regularly audit AI component permissions
+4. **Monitor API Usage**: Check OpenAI/OpenRouter dashboards for unusual activity
+5. **Use Strong Authentication**: Enable strong passwords and 2FA where available
+6. **Local Mode**: Consider using local-only mode for sensitive operations
+7. **Backup Data**: Maintain secure backups of important data
+
+### For API Key Management
+1. **Environment Variables**: Store API keys in environment variables only
+2. **Key Rotation**: Regularly rotate your API keys
+3. **Usage Monitoring**: Set billing alerts on your AI provider accounts
+4. **Least Privilege**: Use API keys with minimal required permissions
+5. **Secure Storage**: Never store API keys in configuration files or code
 
 ### For Developers
 1. **Follow Secure Coding**: Use our security guidelines
@@ -198,8 +209,7 @@ We recognize security researchers who have helped improve AstrOS security:
 
 Stay informed about security updates:
 
-- **Security Mailing List**: security-announce@astros.org
-- **RSS Feed**: https://astros.org/security.rss
+- **Security Mailing List**: aiastros2025@gmail.com
 - **GitHub Security Advisories**: [Security tab](../../security)
 - **CVE Database**: Search for "AstrOS" in [CVE database](https://cve.mitre.org/)
 
@@ -207,9 +217,8 @@ Stay informed about security updates:
 
 ## 📞 Additional Contact Information
 
-- **General Security Questions**: security@astros.org
-- **Security Team Lead**: security-lead@astros.org
-- **Emergency Contact**: +1-XXX-XXX-XXXX (for critical vulnerabilities)
+- **General Security Questions**: aiastros2025@gmail.com
+- **Security Team Lead**: aiastros2025@gmail.com
 
 **PGP Public Key**: Available at https://astros.org/security.asc
 

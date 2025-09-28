@@ -381,7 +381,7 @@ We follow the [Contributor Covenant](CODE_OF_CONDUCT.md). In summary:
 ### 🚨 Reporting Issues
 
 If you experience or witness unacceptable behavior:
-- **Contact maintainers**: Email conduct@astros.org
+- **Contact maintainers**: Email aiastros2025@gmail.com
 - **Private reporting**: All reports are handled confidentially
 - **No retaliation**: We protect reporters from retaliation
 - **Fair process**: All reports are investigated fairly and promptly
