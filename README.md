@@ -13,7 +13,7 @@
 [![Contributors Welcome](https://img.shields.io/badge/Contributors-Welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Discord](https://img.shields.io/discord/9qQstuyt?color=7289da&label=Discord&logo=discord&logoColor=white)](https://discord.gg/9qQstuyt)
 
-[🌟 **Get Started**](https://github.com/AstrOS-Project/astros-core) • [📖 **Documentation**](https://docs.astros.org) • [💬 **Community**](https://discord.gg/9qQstuyt) • [🤝 **Contributing**](CONTRIBUTING.md)
+[🌟 **Get Started**](https://github.com/AstrOS-Project/astros-core) • [📖 **Documentation**](https://docs.astros.org) • [�️ **Roadmap**](ROADMAP.md) • [�💬 **Community**](https://discord.gg/9qQstuyt) • [🤝 **Contributing**](CONTRIBUTING.md)
 
 </div>
 
@@ -233,7 +233,7 @@ We're building the future of computing, and we need your help! AstrOS is a commu
 
 1. **Read our [Contributing Guide](CONTRIBUTING.md)** - Essential information for new contributors
 2. **Join our [Discord Community](https://discord.gg/astros)** - Chat with maintainers and other contributors  
-3. **Check the [Development Roadmap](https://github.com/orgs/AstrOS-Project/projects)** - See what we're working on
+3. **Check the [Development Roadmap](ROADMAP.md)** - See what we're working on and our project phases
 4. **Pick an Issue** - Start with issues labeled [`good first issue`](https://github.com/search?q=org%3AAstrOS-Project+label%3A%22good+first+issue%22&type=issues)
 
 ---
@@ -259,7 +259,7 @@ We're building the future of computing, and we need your help! AstrOS is a commu
 - 🔄 **In Progress**: First Ubuntu ISO build
 - ⏳ **Next**: Plugin system implementation
 
-[📅 View Full Roadmap](https://github.com/orgs/AstrOS-Project/projects/1)
+[📅 View Full Roadmap](ROADMAP.md)
 
 ---
 
@@ -269,19 +269,19 @@ We're building the future of computing, and we need your help! AstrOS is a commu
 
 ### Join Our Community
 
-[![Discord](https://img.shields.io/badge/Discord-Join%20Server-7289da?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/astros)
-[![Matrix](https://img.shields.io/badge/Matrix-Join%20Room-000000?style=for-the-badge&logo=matrix&logoColor=white)](https://matrix.to/#/#astros:matrix.org)
-[![Twitter](https://img.shields.io/badge/Twitter-Follow-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/AstrOSProject)
-[![Reddit](https://img.shields.io/badge/Reddit-Join-FF4500?style=for-the-badge&logo=reddit&logoColor=white)](https://reddit.com/r/AstrOS)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Server-7289da?style=for-the-badge&logo=discord&logoColor=white)]
+[![Matrix](https://img.shields.io/badge/Matrix-Join%20Room-000000?style=for-the-badge&logo=matrix&logoColor=white)]
+[![Twitter](https://img.shields.io/badge/Twitter-Follow-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)]
+[![Reddit](https://img.shields.io/badge/Reddit-Join-FF4500?style=for-the-badge&logo=reddit&logoColor=white)]
 
 </div>
 
 ### 📞 Get Help
 
-- **💬 Community Chat**: Real-time help on [Discord](https://discord.gg/astros)
+- **💬 Community Chat**: Real-time help on [Discord]
 - **🐛 Bug Reports**: [GitHub Issues](https://github.com/AstrOS-Project/astros-core/issues)
 - **📖 Documentation**: [docs.astros.org](https://docs.astros.org)
-- **🏫 Tutorials**: [YouTube Channel](https://youtube.com/@AstrOSProject)
+- **🏫 Tutorials**: [YouTube Channel]
 
 ### 📰 Stay Updated
 

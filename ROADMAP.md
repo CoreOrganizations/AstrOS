@@ -2,7 +2,7 @@
 
 > **An AI-integrated OS based on Ubuntu LTS**
 
-This document outlines the functional roadmap for AstroS, guiding development, contributions, and community alignment.
+This document outlines the functional roadmap for AstrOS, guiding development, contributions, and community alignment.
 
 ⚠️ **Note**: This roadmap is not rigid in terms of timelines; priorities may shift based on community needs and technical discoveries.
 
@@ -18,7 +18,7 @@ This document outlines the functional roadmap for AstroS, guiding development, c
 ## Vision & Principles
 
 ### 🧩 Modularity & Isolation
-AstroS avoids monolithic coupling. AI modules, UI enhancements, and system integrations are separate, controllable, and upgradeable components.
+AstrOS avoids monolithic coupling. AI modules, UI enhancements, and system integrations are separate, controllable, and upgradeable components.
 
 ### 🔗 Compatibility & Leverage
 Built upon Ubuntu LTS to reuse its stable ecosystem (drivers, packages, security updates) without reinventing core OS components.
@@ -55,7 +55,7 @@ Each layer is implemented as modular Debian packages with clear interfaces, ensu
 
 ### Stage 0: Foundations & Infrastructure 🏗️
 
-**Goal**: Establish base infrastructure for building, testing, and maintaining AstroS.
+**Goal**: Establish base infrastructure for building, testing, and maintaining AstrOS.
 
 #### Milestones
 
@@ -79,7 +79,7 @@ Each layer is implemented as modular Debian packages with clear interfaces, ensu
   - Complete setup guides and development environment
   - Label beginner-friendly issues
 
-**Success Criteria**: Functional build pipeline producing bootable AstroS ISOs
+**Success Criteria**: Functional build pipeline producing bootable AstrOS ISOs
 
 ---
 
@@ -143,7 +143,7 @@ Each layer is implemented as modular Debian packages with clear interfaces, ensu
   - Plugin development guides
   - Template repositories and examples
 
-**Success Criteria**: Community can develop and distribute AstroS AI plugins
+**Success Criteria**: Community can develop and distribute AstrOS AI plugins
 
 ---
 
@@ -203,7 +203,7 @@ Each layer is implemented as modular Debian packages with clear interfaces, ensu
   - Delta updates and rollback capabilities
 
 - [ ] **Community Growth**
-  - Hackathons and community events
+  - Community events
   - Contributor recognition and mentorship
 
 - [ ] **Maintenance Framework**

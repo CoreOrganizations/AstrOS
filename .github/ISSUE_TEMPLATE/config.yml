@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Community Discussion
+    url: https://github.com/CoreOrganizations/AstrOS/discussions
+    about: Ask questions, share ideas, and discuss AstrOS with the community
+  - name: 🛡️ Security Vulnerability
+    url: mailto:security@astros.org
+    about: Report security vulnerabilities privately to our security team
+  - name: 💻 Discord Community
+    url: https://discord.gg/9qQstuyt
+    about: Join our Discord server for real-time chat and support
+  - name: 📖 Documentation
+    url: https://docs.astros.org
+    about: Check our comprehensive documentation and guides
