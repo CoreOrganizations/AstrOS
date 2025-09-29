@@ -49,22 +49,25 @@ class UniversalAIClient:
     """Universal AI client that answers ANY question using multiple free APIs"""
     
     def __init__(self):
-        # Multiple free models to try
+        # Use ONLY OpenAI OSS 20B model
         self.models = [
-            "openai/gpt-oss-20b:free",
-            "x-ai/grok-4-fast:free",
-            "qwen/qwen-2.5-72b-instruct:free",
-            "meta-llama/llama-3.2-11b-vision-instruct:free", 
-            "microsoft/phi-3-medium-128k-instruct:free",
-            "google/gemma-2-27b-it:free",
-            "mistralai/mistral-7b-instruct:free"
+            "openai/gpt-oss-20b:free"
         ]
         
-        # Multiple API keys to try
-        self.api_keys = [
-            "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",
-            "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"
-        ]
+        # Multiple API keys to try - check environment variables first
+        self.api_keys = []
+        
+        # Try to get API keys from environment variables
+        import os
+        env_key = os.getenv('OPENROUTER_API_KEY') or os.getenv('ASTROS_API_KEY')
+        if env_key:
+            self.api_keys.append(env_key)
+        
+        # Use the provided API key if no environment variable is set
+        if not self.api_keys:
+            self.api_keys = ["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"]
+            print("� Using provided OpenRouter API key for development")
+            print("🎯 OpenAI OSS 20B model ready for real AI responses!")
         
         self.base_url = "https://openrouter.ai/api/v1"
         self.current_model = 0
@@ -84,10 +87,10 @@ class UniversalAIClient:
                 max_retries=1
             )
         except Exception:
-            pass
+            self.client = None
     
     async def get_real_ai_answer(self, question: str) -> Optional[str]:
-        """Get real AI answer from API - tries all combinations"""
+        """Get real AI answer from API - OpenAI OSS 20B only"""
         
         for key_idx in range(len(self.api_keys)):
             for model_idx in range(len(self.models)):
@@ -119,14 +122,20 @@ class UniversalAIClient:
                     answer = response.choices[0].message.content.strip()
                     if answer and len(answer) > 10:  # Valid response
                         self.successful_config = (key_idx, model_idx)
-                        return f"{answer}\n\n💡 *Powered by AstrOS*"
+                        return f"{answer}\n\n💡 *Powered by {current_model}*"
                 
                 except Exception as e:
                     error_str = str(e).lower()
-                    # Continue trying other combinations
+                    # Continue trying other combinations silently
                     continue
         
-        return None  # All combinations failed
+        # Show API key help message only once per session
+        if not hasattr(self, '_api_help_shown'):
+            print("❌ OpenAI OSS 20B API failed. This system requires a valid API key.")
+            print("💡 Set OPENROUTER_API_KEY environment variable with your API key")
+            print("💡 Get a free API key at: https://openrouter.ai/keys")
+            self._api_help_shown = True
+        return None  # All API attempts failed
     
     async def get_smart_local_answer(self, question: str) -> str:
         """Enhanced local responses when API fails"""
@@ -230,33 +239,28 @@ class EnhancedAstrOSAgent:
         self.conversation_count = 0
         
     async def get_response(self, question: str) -> str:
-        """Get the best possible response to any question"""
+        """Get response using ONLY OpenAI OSS 20B API - no local fallback"""
         self.conversation_count += 1
         
         try:
-            # PRIORITY 1: Always try real AI first
+            # ONLY use real AI API - no local fallback
             ai_response = await self.ai_client.get_real_ai_answer(question)
             if ai_response:
                 return ai_response
             
-            # FALLBACK: Use enhanced local intelligence
-            return await self.ai_client.get_smart_local_answer(question)
+            # If API fails, show error message with instructions
+            return "❌ AI API is currently unavailable. Please check your internet connection and API key.\n\n💡 To fix this:\n1. Set OPENROUTER_API_KEY environment variable\n2. Get a free API key at: https://openrouter.ai/keys\n3. Ensure you have internet connection\n\n🤖 *OpenAI OSS 20B API Required*"
             
         except Exception as e:
-            # Error fallback with more details
-            # Always try local fallback
-            try:
-                return await self.ai_client.get_smart_local_answer(question)
-            except Exception as fallback_error:
-                return f"I encountered a technical issue, but I'm still here to help! Please try rephrasing your question or ask me something else. I'm designed to assist with a wide variety of topics and I'm ready to help you.\n\n🔧 *Error Recovery Mode*"
+            return f"❌ AI API Error: {str(e)[:100]}...\n\n💡 Please check your API key and internet connection.\n\n🤖 *OpenAI OSS 20B API Required*"
 
 
 async def run_interactive():
     """Run interactive mode with universal AI"""
     print("🚀 AstrOS Universal AI Assistant")
     print("=" * 60)
-    print("🤖 Real AI Integration - Answers ANY Question!")
-    print("🧠 Multiple AI Models + Enhanced Local Intelligence")
+    print("🤖 OpenAI OSS 20B - Real AI Integration!")
+    print("💯 API-Only Mode: Every question answered by real AI")
     print("💡 Ask me absolutely anything!")
     print("=" * 60)
     print("\n✅ Ready! Ask me any question...")
