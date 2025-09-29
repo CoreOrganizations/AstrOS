@@ -25,7 +25,7 @@ AstrOS is an open-source, AI-first Linux operating system built on Ubuntu LTS th
 
 ### ✨ Key Features
 
-- **API-First AI Architecture** - Powered by GPT-OSS-20B (microsoft/wizardlm-2-8x22b) for intelligent responses
+- 🖇️ **API-First AI Architecture** - Powered by GPT-OSS-20B (microsoft/wizardlm-2-8x22b) for intelligent responses
 - 🗣️ **Natural Language Control** - Ask any question or give any command in natural language
 - 🤖 **GPT-Powered Intelligence** - OpenRouter integration with response customization system
 - 🧠 **Smart Local Tools** - Local execution combined with AI-generated intelligent responses  
@@ -93,7 +93,7 @@ AstrOS works great without any API keys using local AI processing!
 
 ---
 
-## �🚀 Quick Start
+## 🚀 Quick Start
 
 ### For Users
 ```bash
@@ -291,11 +291,11 @@ Contributors can enhance AstrOS with their own OpenAI or OpenRouter API keys for
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/AstrOS-Project?style=social)
-![GitHub forks](https://img.shields.io/github/forks/AstrOS-Project/astros-core?style=social)
-![GitHub contributors](https://img.shields.io/github/contributors/AstrOS-Project/astros-core)
-![GitHub issues](https://img.shields.io/github/issues/AstrOS-Project/astros-core)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/AstrOS-Project/astros-core)
+![GitHub stars](https://img.shields.io/github/stars/CoreOrganizations/AstrOS?style=social)
+![GitHub forks](https://img.shields.io/github/forks/CoreOrganizations/AstrOS?style=social)
+![GitHub contributors](https://img.shields.io/github/contributors/CoreOrganizations/AstrOS)
+![GitHub issues](https://img.shields.io/github/issues/CoreOrganizations/AstrOS)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/CoreOrganizations/AstrOS)
 
 </div>
 
@@ -318,25 +318,15 @@ Contributors can enhance AstrOS with their own OpenAI or OpenRouter API keys for
 
 ### Join Our Community
 
-[![Discord](https://img.shields.io/badge/Discord-Join%20Server-7289da?style=for-the-badge&logo=discord&logoColor=white)]
-[![Matrix](https://img.shields.io/badge/Matrix-Join%20Room-000000?style=for-the-badge&logo=matrix&logoColor=white)]
-[![Twitter](https://img.shields.io/badge/Twitter-Follow-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)]
-[![Reddit](https://img.shields.io/badge/Reddit-Join-FF4500?style=for-the-badge&logo=reddit&logoColor=white)]
+[![Discord](https://img.shields.io/badge/Discord-Join%20Server-7289da?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/9qQstuyt)
 
 </div>
 
 ### 📞 Get Help
 
-- **💬 Community Chat**: Real-time help on [Discord]
+- **💬 Community Chat**: Real-time help on [Discord](https://discord.gg/9qQstuyt)
 - **🐛 Bug Reports**: [GitHub Issues](https://github.com/AstrOS-Project/astros-core/issues)
 - **📖 Documentation**: [docs.astros.org](https://docs.astros.org)
-- **🏫 Tutorials**: [YouTube Channel]
-
-### 📰 Stay Updated
-
-- **📧 Newsletter**: [Subscribe](https://astros.org/newsletter) for monthly updates
-- **📱 Social Media**: Follow us on [Twitter](https://twitter.com/AstrOSProject) for daily updates
-- **📝 Blog**: Read our [development blog](https://blog.astros.org) for technical deep-dives
 
 ---
 
