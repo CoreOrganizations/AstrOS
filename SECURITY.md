@@ -219,11 +219,8 @@ Stay informed about security updates:
 
 - **General Security Questions**: aiastros2025@gmail.com
 - **Security Team Lead**: aiastros2025@gmail.com
-
-**PGP Public Key**: Available at https://astros.org/security.asc
-
 ---
 
 *Last updated: September 28, 2025*
 
-For general questions or support, please visit our [Community Discussions](../../discussions) or join our [Discord](https://discord.gg/astros).
+For general questions or support, please visit our [Community Discussions](../../discussions) or join our [Discord]([https://discord.gg/astros](https://discord.gg/9qQstuyt).
