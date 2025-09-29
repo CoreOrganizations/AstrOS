@@ -39,13 +39,13 @@ Strict code review, dependency audits, security policies, and comprehensive docu
 
 ```
 ┌───────────────────────────────┐
-│     User-facing UI / Agents    │ ← UI integrations, agent assistants
+│     User-facing UI / Agents   │ ← UI integrations, agent assistants
 ├───────────────────────────────┤
-│     AI / Inference Layer       │ ← Model runtime, pipelines, context
+│     AI / Inference Layer      │ ← Model runtime, pipelines, context
 ├───────────────────────────────┤
-│     Integration / Glue Layer   │ ← Connectors, APIs, orchestrators
+│     Integration / Glue Layer  │ ← Connectors, APIs, orchestrators
 ├───────────────────────────────┤
-│     Ubuntu Base Layer          │ ← Kernel, drivers, system services
+│     Ubuntu Base Layer         │ ← Kernel, drivers, system services
 └───────────────────────────────┘
 ```
 
