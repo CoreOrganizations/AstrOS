@@ -89,7 +89,15 @@ class EnhancedNLPProcessor:
             "conversation": [
                 "tell me about", "what do you think", "do you know", "opinion",
                 "chat", "talk", "discuss", "conversation", "let's talk",
-                "i want to know", "explain to me", "what is", "how does"
+                "i want to know", "explain to me", "what is", "how does",
+                "who are you", "why", "because", "where is", "when",
+                "how are you", "what can you", "describe", "definition",
+                "meaning", "information about", "details about", "facts about",
+                "who", "what", "where", "when", "why", "how", "which",
+                "paris", "london", "tokyo", "new york", "city", "country",
+                "science", "technology", "computer", "ai", "machine learning",
+                "python", "programming", "earth", "sun", "water", "music",
+                "error", "problem", "issue", "question", "answer"
             ],
             "file_management": [
                 "file", "folder", "directory", "organize files", "create folder",
@@ -107,7 +115,8 @@ class EnhancedNLPProcessor:
                 "calculate", "compute", "math", "add", "subtract", "multiply",
                 "divide", "percentage", "what is", "how much", "sum", "total",
                 "equation", "formula", "arithmetic", "numbers", "plus", "minus",
-                "times", "divided by", "equals", "result"
+                "times", "divided by", "equals", "result", "+", "-", "*", "/",
+                "×", "÷"
             ],
             "weather": [
                 "weather", "temperature", "forecast", "climate", "rain",
@@ -204,6 +213,27 @@ class EnhancedNLPProcessor:
     async def _classify_intent_local(self, text: str, entities: List[Entity]) -> Optional[Intent]:
         """Local intent classification using pattern matching"""
         text_lower = text.lower()
+        text_stripped = text.strip()
+        
+        # Special case: Check if this looks like a pure mathematical expression
+        # This handles cases like "3 + 5 + 5 + 6" without calculation keywords
+        math_expression_pattern = r'^\s*[\d\+\-\*\/\(\)\.\s]+\s*$'
+        has_operator_pattern = r'[\+\-\*\/]'
+        
+        if (re.match(math_expression_pattern, text_stripped) and 
+            re.search(has_operator_pattern, text_stripped) and
+            len(text_stripped.strip()) > 2):  # Must be more than just "3" or similar
+            
+            parameters = self._extract_parameters_enhanced("calculation", text, entities)
+            return Intent(
+                name="calculation",
+                confidence=0.95,  # High confidence for pure math expressions
+                entities=entities,
+                parameters=parameters,
+                source="local"
+            )
+        
+        # Standard pattern matching
         best_intent = None
         best_score = 0.0
         
@@ -276,7 +306,10 @@ class EnhancedNLPProcessor:
     
     def _extract_parameters_enhanced(self, intent: str, text: str, entities: List[Entity]) -> Dict[str, Any]:
         """Enhanced parameter extraction with better context understanding"""
-        parameters = {}
+        parameters = {
+            "query": text,  # Always include original query for context
+            "text": text    # Alternative key for compatibility
+        }
         
         try:
             if intent == "calculation":
@@ -302,26 +335,45 @@ class EnhancedNLPProcessor:
                 
                 parameters["operators"] = operators
                 
-                # Enhanced expression extraction
+                # Enhanced expression extraction - improved patterns
                 math_patterns = [
-                    r'[\d\+\*\/\(\)\.\s-]+(?:[=\s]*[\d\.]+)?',
-                    r'\d+\.?\d*\s*[\+\*\/-]\s*\d+\.?\d*',
-                    r'(?:what\s+is|calculate|compute)\s+([\d\+\*\/\(\)\.\s-]+)',
+                    r'[\d\+\-\*\/\(\)\.\s]+',  # General math expression
+                    r'\d+(?:\.\d+)?\s*[\+\-\*\/]\s*\d+(?:\.\d+)?(?:\s*[\+\-\*\/]\s*\d+(?:\.\d+)?)*',  # Chain operations
+                    r'(?:what\s+is|calculate|compute)\s+([\d\+\-\*\/\(\)\.\s]+)',  # Prefixed expressions
                 ]
                 
+                # Look for mathematical expressions in the text
+                expression_found = None
                 for pattern in math_patterns:
                     try:
-                        match = re.search(pattern, text, re.IGNORECASE)
-                        if match:
-                            expression = match.group(1) if match.lastindex else match.group(0)
-                            # Clean up the expression
-                            expression = re.sub(r'\b(?:what\s+is|calculate|compute|equals?)\b', '', expression, flags=re.IGNORECASE).strip()
-                            if expression:
-                                parameters["expression"] = expression
-                                break
+                        matches = re.findall(pattern, text, re.IGNORECASE)
+                        for match in matches:
+                            candidate = match.strip() if isinstance(match, str) else match
+                            # Validate that it looks like a math expression
+                            if re.match(r'^[\d\+\-\*\/\(\)\.\s]+$', candidate) and re.search(r'[\+\-\*\/]', candidate):
+                                # Clean up extra spaces
+                                candidate = ' '.join(candidate.split())
+                                if len(candidate) > 1:  # Must be more than just a number
+                                    expression_found = candidate
+                                    break
+                        if expression_found:
+                            break
                     except re.error as e:
                         self.logger.warning(f"Regex pattern error: {e}")
                         continue
+                
+                # If no complex pattern found, look for simple sequences like "3 + 5 + 5 + 6"
+                if not expression_found:
+                    # Look for number sequences with operators
+                    simple_math = re.search(r'\b\d+(?:\s*[\+\-\*\/]\s*\d+)+\b', text)
+                    if simple_math:
+                        expression_found = simple_math.group(0)
+                
+                if expression_found:
+                    parameters["expression"] = expression_found
+                
+                # Always include original text for fallback processing
+                parameters["original_text"] = text
             
             elif intent == "file_management":
                 # Enhanced file operation detection

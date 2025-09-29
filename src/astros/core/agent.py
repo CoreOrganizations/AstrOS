@@ -188,8 +188,29 @@ class AstrOSAgent:
                     'confidence': processed_input.intent.confidence
                 }
             
-            # Check if we have a valid intent
+            # Check if we have a valid intent, if not, route to conversation plugin
             if not processed_input.intent:
+                # Fallback to conversation plugin for general questions
+                try:
+                    result = await self.plugin_manager.execute_intent(
+                        "conversation",
+                        {"query": command, "text": command, "intent": "general"}
+                    )
+                    if result.success:
+                        return {
+                            'success': True,
+                            'message': result.message,
+                            'timestamp': datetime.now().isoformat(),
+                            'agent': self.config.agent_name,
+                            'intent': 'conversation',
+                            'confidence': 0.7,
+                            'entities': [],
+                            'data': result.data
+                        }
+                except Exception as e:
+                    self.logger.error(f"Conversation fallback error: {e}")
+                
+                # Final fallback
                 return {
                     'success': False,
                     'message': "I'm not sure how to help with that. Could you try rephrasing?",
@@ -396,8 +417,29 @@ class AstrOSAgent:
                     'confidence': processed_input.intent.confidence
                 }
             
-            # Check if we have a valid intent
+            # Check if we have a valid intent, if not, route to conversation plugin
             if not processed_input.intent:
+                # Fallback to conversation plugin for general questions
+                try:
+                    result = await self.plugin_manager.execute_intent(
+                        "conversation",
+                        {"query": command, "text": command, "intent": "general"}
+                    )
+                    if result.success:
+                        return {
+                            'success': True,
+                            'message': result.message,
+                            'timestamp': datetime.now().isoformat(),
+                            'agent': self.config.agent_name,
+                            'intent': 'conversation',
+                            'confidence': 0.7,
+                            'entities': [],
+                            'data': result.data
+                        }
+                except Exception as e:
+                    self.logger.error(f"Conversation fallback error: {e}")
+                
+                # Final fallback
                 return {
                     'success': False,
                     'message': "I'm not sure how to help with that. Could you try rephrasing?",
