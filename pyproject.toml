@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "astros"
-version = "1.1.5"
+version = "1.1.6"
 description = "AI-Integrated Operating System - Universal AI Assistant"
 authors = [{name = "AstrOS Team", email = "team@astros.org"}]
 license = {text = "Apache-2.0"}

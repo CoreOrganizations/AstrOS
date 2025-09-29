@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AstrOS - AI-Integrated Operating System v1.1.5
+AstrOS - AI-Integrated Operating System v1.1.6
 Real AI Integration - Universal AI Assistant that answers ANY question using API directly
 """
 
