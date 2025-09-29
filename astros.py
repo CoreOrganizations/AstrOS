@@ -143,7 +143,6 @@ class UniversalAIClient:
         
         # Extensive knowledge base
         knowledge = {
-            "ayurveda": "Ayurveda is an ancient Indian system of medicine dating back over 5,000 years. It emphasizes balance between mind, body, and spirit through natural approaches including herbal medicines, dietary guidelines, yoga, meditation, and lifestyle practices. Ayurveda identifies three doshas (Vata, Pitta, Kapha) that govern physiological and psychological functions.",
             
             "paris": "Paris is the capital and largest city of France, located in north-central France on the Seine River. Known as 'The City of Light,' it's famous for the Eiffel Tower, Louvre Museum, Notre-Dame Cathedral, Arc de Triomphe, and Champs-Élysées. Paris is a global center for art, fashion, gastronomy, and culture.",
             
