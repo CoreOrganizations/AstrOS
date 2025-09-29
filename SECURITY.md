@@ -139,7 +139,7 @@ We appreciate security researchers who help improve AstrOS security:
 - AI model integration and security
 
 ### Out of Scope
-- Third-party plugins (unless distributed officially)
+- Third-party plugins (unless distributed officially).
 - User-created configurations or scripts
 - Underlying Ubuntu system vulnerabilities (report to Ubuntu)
 - Hardware vulnerabilities (report to hardware vendors)
