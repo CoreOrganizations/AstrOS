@@ -63,20 +63,13 @@ class UniversalAIClient:
         if env_key:
             self.api_keys.append(env_key)
         
-        # Show instructions if no API key is provided
+        # Use the provided working API key if no environment variable is set
         if not self.api_keys:
-            print("🚨 SETUP REQUIRED: AstrOS needs an OpenRouter API key to work!")
-            print("📝 To get started:")
-            print("   1. Visit: https://openrouter.ai/keys")
-            print("   2. Sign up for a FREE account")
-            print("   3. Create an API key")
-            print("   4. Set environment variable: OPENROUTER_API_KEY=your_key_here")
-            print("   5. Restart AstrOS")
-            print("\n💡 Example setup commands:")
-            print("   Windows: set OPENROUTER_API_KEY=sk-or-v1-your-key-here")
-            print("   Linux/Mac: export OPENROUTER_API_KEY=sk-or-v1-your-key-here")
-            print("\n🎯 AstrOS uses ONLY OpenAI OSS 20B for real AI responses!")
-            self.api_keys = ["SETUP_REQUIRED"]  # Placeholder to prevent crashes
+            self.api_keys = [
+                "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"
+            ]
+            print("� Using provided OpenRouter API key for OpenAI OSS 20B")
+            print("🎯 AstrOS ready with real AI responses!")
         
         self.base_url = "https://openrouter.ai/api/v1"
         self.current_model = 0
@@ -89,11 +82,6 @@ class UniversalAIClient:
     def initialize_client(self):
         """Initialize the OpenAI client"""
         try:
-            # Don't initialize if setup is required
-            if self.api_keys == ["SETUP_REQUIRED"]:
-                self.client = None
-                return
-                
             self.client = AsyncOpenAI(
                 api_key=self.api_keys[self.current_key],
                 base_url=self.base_url,
@@ -105,10 +93,6 @@ class UniversalAIClient:
     
     async def get_real_ai_answer(self, question: str) -> Optional[str]:
         """Get real AI answer from API - tries all combinations"""
-        
-        # Check if setup is required
-        if self.api_keys == ["SETUP_REQUIRED"]:
-            return None
         
         for key_idx in range(len(self.api_keys)):
             for model_idx in range(len(self.models)):
@@ -277,8 +261,8 @@ async def run_interactive():
     """Run interactive mode with universal AI"""
     print("🚀 AstrOS Universal AI Assistant")
     print("=" * 60)
-    print("🤖 Real AI Integration - Answers ANY Question!")
-    print("🧠 Multiple AI Models + Enhanced Local Intelligence")
+    print("🤖 OpenAI OSS 20B - Real AI Integration!")
+    print("💯 API-Only Mode: Every question answered by real AI")
     print("💡 Ask me absolutely anything!")
     print("=" * 60)
     print("\n✅ Ready! Ask me any question...")
