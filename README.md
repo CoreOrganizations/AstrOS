@@ -64,7 +64,7 @@ AstrOS is an open-source, AI-first Linux operating system built on Ubuntu LTS th
 
 ---
 
-## � API Setup for Enhanced AI Features
+## API Setup for Enhanced AI Features
 
 AstrOS supports powerful GPT integration! Contributors can bring their own API keys for enhanced capabilities:
 
@@ -128,16 +128,6 @@ python demo_enhanced.py
 ```
 
 ---
-
-## 🎬 See AstrOS in Action
-
-<div align="center">
-
-[![AstrOS Demo Video](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
-
-*Click to watch: AstrOS transforming everyday computing tasks*
-
-</div>
 
 ### Example Use Cases
 
@@ -322,7 +312,7 @@ Contributors can enhance AstrOS with their own OpenAI or OpenRouter API keys for
 
 </div>
 
-### 📞 Get Help
+### 🪽 Get Help
 
 - **💬 Community Chat**: Real-time help on [Discord](https://discord.gg/9qQstuyt)
 - **🐛 Bug Reports**: [GitHub Issues](https://github.com/AstrOS-Project/astros-core/issues)
@@ -346,7 +336,7 @@ We take security seriously. If you discover a security vulnerability, please:
 - **DO NOT** create a public GitHub issue
 - Email us at: **aiastros2025@gmail.com**
 - Include detailed reproduction steps
-- We'll acknowledge within 48 hours
+- We'll acknowledge
 
 [🔒 View our Security Policy](SECURITY.md)
 
