@@ -66,7 +66,7 @@ class UniversalAIClient:
         # Use the provided API key if no environment variable is set
         if not self.api_keys:
             self.api_keys = ["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"]
-            print("� Using provided OpenRouter API key for development")
+            print("🔑 Using provided OpenRouter API key for development")
             print("🎯 OpenAI OSS 20B model ready for real AI responses!")
         
         self.base_url = "https://openrouter.ai/api/v1"
@@ -89,8 +89,8 @@ class UniversalAIClient:
         except Exception:
             self.client = None
     
-    async def get_real_ai_answer(self, question: str) -> Optional[str]:
-        """Get real AI answer from API - OpenAI OSS 20B only"""
+    async def get_real_ai_answer(self, question: str, conversation_history: list = None) -> Optional[str]:
+        """Get real AI answer from API with conversation context - OpenAI OSS 20B only"""
         
         for key_idx in range(len(self.api_keys)):
             for model_idx in range(len(self.models)):
@@ -102,19 +102,28 @@ class UniversalAIClient:
                     
                     current_model = self.models[self.current_model]
                     
+                    # Build messages with conversation context
+                    messages = [
+                        {
+                            "role": "system",
+                            "content": "You are AstrOS, an intelligent AI assistant. Provide clear, accurate, and helpful answers to any question. Be informative and conversational. Remember the conversation context and refer to previous messages when relevant."
+                        }
+                    ]
+                    
+                    # Add conversation history if available
+                    if conversation_history:
+                        messages.extend(conversation_history[-6:])  # Last 6 messages for context
+                    
+                    # Add current question
+                    messages.append({
+                        "role": "user", 
+                        "content": question
+                    })
+                    
                     # Make API call
                     response = await self.client.chat.completions.create(
                         model=current_model,
-                        messages=[
-                            {
-                                "role": "system",
-                                "content": "You are AstrOS, an intelligent AI assistant. Provide clear, accurate, and helpful answers to any question. Be informative and conversational."
-                            },
-                            {
-                                "role": "user", 
-                                "content": question
-                            }
-                        ],
+                        messages=messages,
                         max_tokens=800,
                         temperature=0.7
                     )
@@ -231,20 +240,41 @@ class UniversalAIClient:
 
 
 class EnhancedAstrOSAgent:
-    """Enhanced AstrOS Agent with Universal AI Integration"""
+    """Enhanced AstrOS Agent with Universal AI Integration and Context Management"""
     
     def __init__(self):
         self.ai_client = UniversalAIClient()
         self.conversation_count = 0
+        self.conversation_history = []  # Store conversation context
+        self.max_history = 10  # Keep last 10 exchanges for context
         
     async def get_response(self, question: str) -> str:
-        """Get response using ONLY OpenAI OSS 20B API - no local fallback"""
+        """Get response using ONLY OpenAI OSS 20B API with conversation context"""
         self.conversation_count += 1
         
         try:
-            # ONLY use real AI API - no local fallback
-            ai_response = await self.ai_client.get_real_ai_answer(question)
+            # Add user question to conversation history
+            self.conversation_history.append({
+                "role": "user",
+                "content": question
+            })
+            
+            # ONLY use real AI API with conversation context
+            ai_response = await self.ai_client.get_real_ai_answer(question, self.conversation_history)
             if ai_response:
+                # Extract just the response text without the "Powered by" part
+                response_text = ai_response.split("\n\n💡 *Powered by")[0]
+                
+                # Add AI response to conversation history
+                self.conversation_history.append({
+                    "role": "assistant",
+                    "content": response_text
+                })
+                
+                # Keep only recent conversation history
+                if len(self.conversation_history) > self.max_history * 2:  # *2 for user+assistant pairs
+                    self.conversation_history = self.conversation_history[-self.max_history * 2:]
+                
                 return ai_response
             
             # If API fails, show error message with instructions
