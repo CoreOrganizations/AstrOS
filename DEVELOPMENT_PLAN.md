@@ -25,7 +25,7 @@
   - Fallback mechanisms (local -> cloud, cloud -> local)
   - Performance monitoring and automatic switching
   - Context-aware model selection
-  - Privacy mode (local-only processing)
+  - Privacy mode (local-only processing....)
 
 #### **Phase 2.2: Advanced Plugin Ecosystem (Weeks 3-4)**
 - [ ] **Web Integration Plugin**

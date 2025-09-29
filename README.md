@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![AstrOS Logo](Local/5d579937-7bef-47af-a4a6-fe0854607b65.png)
+![AstrOS Logo](assets/5d579937-7bef-47af-a4a6-fe0854607b65.png)
 
 **The AI-Integrated Operating System**
 
