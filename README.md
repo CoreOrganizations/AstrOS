@@ -1,4 +1,4 @@
-# AstrOS Project ✨
+# Project AstrOS ✨
 
 <div align="center">
 
