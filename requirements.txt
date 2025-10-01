@@ -1,6 +1,10 @@
 # AstrOS Universal AI Assistant - Core Dependencies
+# Python 3.8+ required
+
+# Essential packages for AstrOS
 openai>=1.0.0
 httpx>=0.24.0
+python-dotenv>=1.0.0
 
 # Additional utilities (optional)
 tiktoken>=0.5.0

@@ -21,203 +21,317 @@
 
 ## 🎯 What is AstrOS?
 
-AstrOS is an open-source, AI-first Linux operating system built on Ubuntu LTS that transforms how you interact with your computer. Instead of clicking through menus and remembering complex commands, you simply talk to your OS in natural language.
+AstrOS is a complete Ubuntu-based operating system with native AI capabilities built into the OS layer. Instead of running AI as an application, AstrOS integrates AI directly into the system, making your entire desktop intelligent.
 
-### ✨ Key Features
+Talk to your OS, automate tasks, control applications, manage files, and enhance productivity—all through natural language and AI-powered system services.
 
-- 🖇️ **API-First AI Architecture** - Powered by GPT-OSS-20B (microsoft/wizardlm-2-8x22b) for intelligent responses
-- 🗣️ **Natural Language Control** - Ask any question or give any command in natural language
-- 🤖 **GPT-Powered Intelligence** - OpenRouter integration with response customization system
-- 🧠 **Smart Local Tools** - Local execution combined with AI-generated intelligent responses  
-- 🔒 **Privacy-First Design** - Your data stays local, you control what goes to the cloud
-- 🧩 **Plugin Ecosystem** - Extensible architecture with AI-enhanced community plugins
-- 🛡️ **Built on Ubuntu LTS** - Rock-solid foundation with excellent hardware support
-- 🌐 **Open Source** - Fully auditable, community-driven development
-- 💰 **Cost-Effective** - Use OpenRouter for cheaper API access than direct OpenAI
+### ✨ What Makes AstrOS Different?
 
----
+Not just another Linux distro - AstrOS fundamentally reimagines how you interact with your computer:
 
-## 🏗️ Project Repositories
-
-<table>
-<tr>
-<td width="50%">
-
-### 🔥 Core Components
-- **[astros-core]** - Main AI agent and system orchestrator
-- **[astros-plugins]** - Official plugin collection
-- **[astros-ui]** - User interfaces and desktop integration
-- **[astros-ubuntu-iso]** - Ubuntu-based ISO builder
-
-</td>
-<td width="50%">
-
-### 📚 Documentation & Tools
-- **[astros-docs]** - Official documentation
-- **[astros-website]** - Project website source
-- **[astros-ci]** - Shared CI/CD workflows
-- **[community]** - Community guidelines and discussions
-
-</td>
-</tr>
-</table>
+- 🖥️ **OS-Level AI Integration** - AI runs as a native system service, not an app
+- 🎙️ **Voice-First Interface** - Control your entire system with natural language
+- 🔧 **Intelligent Automation** - System learns your workflows and automates them
+- 🎨 **Custom Desktop Environment** - Modified GNOME with AI-enhanced widgets
+- � **Pre-Configured & Optimized** - Everything works out of the box
+- 🔒 **Privacy-Focused** - Local AI processing with optional cloud features
+- 🛡️ **Ubuntu LTS Foundation** - Stable, secure, and hardware-compatible
+- 🌐 **Fully Open Source** - Every component is auditable and modifiable
 
 ---
 
-## API Setup for Enhanced AI Features
+## 🌟 Key Features
 
-AstrOS supports powerful GPT integration! Contributors can bring their own API keys for enhanced capabilities:
+### 🤖 Native AI System Service
 
-### 📋 Quick API Setup
+- **astros-agent** - SystemD service running AI orchestrator
+- **Global AI Hotkey** - Super + Space to invoke AI from anywhere
+- **Context-Aware** - AI knows what application you're using
+- **Multi-Model Support** - Local models + cloud APIs (OpenAI, Anthropic, etc.)
 
-**Option 1: OpenRouter (Recommended - Cheaper) 💰**
-```bash
-# Sign up at https://openrouter.ai (cheaper than OpenAI direct)
-export ASTROS_OPENAI_API_KEY="sk-or-v1-your-openrouter-key"
-export ASTROS_OPENAI_BASE_URL="https://openrouter.ai/api/v1"
-export ASTROS_OPENAI_MODEL="openai/gpt-4"
-export ASTROS_ENABLE_OPENAI=true
-```
+### 🎨 Custom Desktop Experience
 
-**Option 2: OpenAI Direct**
-```bash
-# Get API key from https://platform.openai.com/api-keys
-export ASTROS_OPENAI_API_KEY="sk-your-openai-key"
-export ASTROS_ENABLE_OPENAI=true
-```
+- **AstrOS Desktop** - Modified GNOME Shell with AI widgets
+- **AI Command Palette** - Quick access to AI features
+- **Smart Notifications** - AI-filtered and prioritized
+- **Intelligent Search** - Natural language file and app search
+- **Voice Control** - Full system control via speech
 
-**📖 [Complete API Setup Guide →](API_SETUP.md)**
+### 🔌 Deep System Integration
 
-### 🆓 Local Mode (No API Required)
-AstrOS works great without any API keys using local AI processing!
+- **File Management** - AI-powered organization and search
+- **Application Control** - Launch, manage, and automate apps
+- **System Settings** - Natural language configuration
+- **Package Management** - "Install the latest video editor"
+- **Network Management** - Smart connectivity and troubleshooting
+
+### 🛠️ Developer Tools
+
+- **Code Assistant** - Built-in AI coding help
+- **Terminal Integration** - AI-powered command suggestions
+- **Git Integration** - Natural language version control
+- **Project Management** - Intelligent workspace organization
+- **Documentation Generator** - Auto-generate code docs
+
+### 🎯 Productivity Features
+
+- **Smart Workspace Switching** - AI-organized virtual desktops
+- **Focus Mode** - AI-managed distraction blocking
+- **Task Automation** - Record and replay workflows
+- **Calendar Integration** - AI scheduling assistant
+- **Email Management** - Smart filtering and responses
 
 ---
 
-## 🚀 Quick Start
+## 🏗️ Architecture Overview
 
-### For Users
-```bash
-# Download the latest AstrOS Ubuntu ISO
-wget https://releases.astros.org/latest/astros-ubuntu-24.04-amd64.iso
-
-# Or install on existing Ubuntu system
-sudo add-apt-repository ppa:astros/stable
-sudo apt update && sudo apt install astros-desktop
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    User Interface Layer                     │
+│   GNOME Shell Extensions  │  AI Widgets  │  Voice Input     │
+├─────────────────────────────────────────────────────────────┤
+│                  AstrOS Desktop Environment                 │
+│   Custom Themes  │  AI Command Palette  │  Smart Search    │
+├─────────────────────────────────────────────────────────────┤
+│               AstrOS Core System Services                   │
+│  astros-agent (AI Orchestrator)  │  astros-voice  │ plugins│
+├─────────────────────────────────────────────────────────────┤
+│                    System Integration Layer                 │
+│  D-Bus Bridge  │  SystemD Services  │  PolicyKit Rules     │
+├─────────────────────────────────────────────────────────────┤
+│                   AI Processing Layer                       │
+│  Local Models (Ollama)  │  Cloud APIs  │  RAG System       │
+├─────────────────────────────────────────────────────────────┤
+│                    Ubuntu 24.04 LTS Base                    │
+│  Kernel  │  SystemD  │  GNOME  │  Standard Packages        │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### For Developers
+### 🔧 Core Components
+
+**1. astros-agent (Core AI Service)**
+- Language: Python 3.12+
+- Location: `/usr/lib/astros/agent/`
+- Service: `astros-agent.service`
+- Function: Main AI orchestrator, plugin manager, context handler
+
+**2. astros-desktop (Desktop Environment)**
+- Base: GNOME 46 (modified)
+- Location: `/usr/share/gnome-shell/extensions/astros@astros.org/`
+- Function: Custom UI elements, AI widgets, command palette
+
+**3. astros-plugins (Plugin System)**
+- Location: `/usr/lib/astros/plugins/`
+- Types: System, File, App, Network, Developer, Productivity
+- Function: Extend AI capabilities with specific tools
+
+**4. astros-voice (Voice Control)**
+- Engine: Whisper (local) + cloud options
+- Location: `/usr/lib/astros/voice/`
+- Function: Speech-to-text and text-to-speech
+
+**5. astros-models (AI Models)**
+- Local: Ollama integration
+- Cloud: OpenAI, Anthropic, Google APIs
+- Location: `/var/lib/astros/models/`
+- Function: Manage and route AI inference
+
+---
+
+## 🎯 Usage Examples
+
+### 🗣️ Voice Commands
+
 ```bash
-# Clone and set up development environment
+# Activate AI: Press Super + Space or say "Hey AstrOS"
+
+"Show me all Python files I edited yesterday"
+"Install Docker and set it up for my project"
+"Switch to focus mode and block social media for 2 hours"
+"Organize my Downloads folder by file type"
+"Create a new React project called 'my-app'"
+"What's using the most CPU right now?"
+"Schedule a backup of my Documents folder every night"
+```
+
+### 💻 Terminal Integration
+
+```bash
+# AI command suggestions
+$ astros suggest "compress video file"
+→ ffmpeg -i input.mp4 -vcodec h264 -acodec mp3 output.mp4
+
+# Natural language commands
+$ astros "find large files in home directory"
+→ Executing: find ~/ -type f -size +100M -exec ls -lh {} \;
+
+# Automated troubleshooting
+$ astros "why is my wifi not working"
+→ Diagnosing network issues...
+```
+
+### 🎨 Desktop Features
+
+- **AI Sidebar**: Always-available chat interface (Ctrl+Alt+A)
+- **Smart App Launcher**: Type what you want to do, not app names
+- **Intelligent Clipboard**: AI-enhanced copy/paste with history
+- **Context Menus**: Right-click anywhere for AI actions
+- **Quick Actions**: Customizable AI shortcuts
+
+---
+
+## 🔌 Plugin System
+
+AstrOS uses a powerful plugin architecture for extensibility.
+
+### 📦 Official Plugins (Pre-installed)
+
+| Plugin | Description | Examples |
+|--------|-------------|----------|
+| file-manager | AI file operations | "Find all photos from last summer" |
+| app-control | Launch and manage apps | "Open my code editor and browser" |
+| system-config | System settings | "Enable dark mode and increase volume" |
+| package-manager | Software installation | "Install GIMP and Inkscape" |
+| network-tools | Network management | "Connect to office VPN" |
+| developer-tools | Coding assistance | "Create a Python virtual environment" |
+| text-editor | Document editing | "Fix grammar in this document" |
+| web-browser | Browser automation | "Open GitHub and check my PRs" |
+| calendar | Schedule management | "What's on my calendar tomorrow" |
+| email | Email operations | "Show unread emails from my boss" |
+
+### 🛠️ Community Plugins
+
+Browse and install from the AstrOS Plugin Store:
+
+```bash
+astros-plugins search "video editor"
+astros-plugins install astros-plugin-kdenlive
+astros-plugins enable astros-plugin-kdenlive
+```
+
+### 👨‍💻 Create Your Own Plugin
+
+```bash
+# Generate plugin template
+astros-plugins create my-awesome-plugin
+
+# Plugin structure
+my-awesome-plugin/
+├── manifest.json          # Plugin metadata
+├── plugin.py             # Main plugin code
+├── config.yaml           # Configuration
+├── requirements.txt      # Dependencies
+└── README.md            # Documentation
+```
+
+📖 **[Plugin Development Guide →](docs/CONTRIBUTING.md)**
+
+---
+
+## 🏛️ Project Structure
+
+```
+AstrOS/
+├── iso-builder/                 # Ubuntu ISO customization
+│   ├── packages/               # Pre-installed packages
+│   ├── overlays/              # File system overlays
+│   ├── preseed/               # Automated installer config
+│   └── build-iso.sh           # ISO build script
+│
+├── astros-core/                # Core system components
+│   ├── agent/                 # AI orchestrator service
+│   ├── plugins/               # Plugin system
+│   ├── dbus/                  # D-Bus interfaces
+│   └── systemd/               # Service definitions
+│
+├── astros-desktop/             # Desktop environment
+│   ├── gnome-shell/           # GNOME extensions
+│   ├── themes/                # Visual themes
+│   ├── widgets/               # AI widgets
+│   └── settings/              # Configuration panels
+│
+├── astros-voice/               # Voice control
+│   ├── whisper/               # Speech recognition
+│   ├── tts/                   # Text-to-speech
+│   └── hotword/               # Wake word detection
+│
+├── astros-plugins/             # Official plugins
+│   ├── file-manager/
+│   ├── app-control/
+│   ├── system-config/
+│   └── ...
+│
+├── astros-models/              # AI model management
+│   ├── ollama/                # Local model integration
+│   ├── openai/                # OpenAI API client
+│   └── rag/                   # RAG system
+│
+├── docs/                       # Documentation
+│   ├── installation.md
+│   ├── user-guide.md
+│   ├── plugin-development.md
+│   └── architecture.md
+│
+├── tests/                      # Testing suite
+│   ├── iso/                   # ISO build tests
+│   ├── integration/           # Integration tests
+│   └── e2e/                   # End-to-end tests
+│
+└── tools/                      # Development tools
+    ├── build/                 # Build scripts
+    ├── ci/                    # CI/CD configuration
+    └── debug/                 # Debugging utilities
+```
+
+---
+
+## 🚀 Development Setup
+
+### For Contributors
+
+```bash
+# Clone repository
 git clone https://github.com/CoreOrganizations/AstrOS.git
 cd AstrOS
 
-# Set up Python environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# or venv\Scripts\activate  # Windows
+# Install build dependencies
+sudo apt install -y \
+    debootstrap squashfs-tools xorriso \
+    isolinux syslinux-utils genisoimage \
+    python3-pip python3-venv nodejs npm
 
-# Install dependencies
-pip install -e .
+# Set up development environment
+./tools/setup-dev-env.sh
 
-# Optional: Add your API key for enhanced AI features
-export ASTROS_OPENAI_API_KEY="your-key-here"  # OpenAI or OpenRouter
-export ASTROS_ENABLE_OPENAI=true
+# Build AstrOS ISO (takes 30-60 minutes)
+cd iso-builder
+sudo ./build-iso.sh
 
-# Run AstrOS
-python demo_enhanced.py
+# Test in VM
+./tools/test-vm.sh build/astros-24.04-amd64.iso
 ```
 
----
-
-### Example Use Cases
+### For Testing Core Components
 
 ```bash
-# Natural language file management
-"Move all my photos from Downloads to Pictures and organize by date"
+# Test AI agent without full OS
+cd astros-core/agent
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python test_agent.py
 
-# Intelligent development assistance  
-"Set up a new Python project with FastAPI and PostgreSQL"
+# Test plugins
+cd astros-plugins/file-manager
+pytest tests/
 
-# Smart system automation
-"When I plug in my headphones, switch to focus mode and open my coding playlist"
-
-# Voice-controlled productivity
-"Schedule a meeting with the team for tomorrow at 2 PM and send calendar invites"
+# Test GNOME extension
+cd astros-desktop/gnome-shell/astros@astros.org
+gnome-extensions pack
+gnome-extensions install astros@astros.org.shell-extension.zip
 ```
 
----
-
-## 🏛️ Architecture Overview
-
-<div align="center">
-
-```mermaid
-graph TB
-    A[User Interface] --> B[AstrOS Agent]
-    B --> C[Plugin System]
-    B --> D[AI Adapters]
-    B --> E[Local RAG Store]
-    
-    C --> F[Voice Control]
-    C --> G[File Management]
-    C --> H[System Automation]
-    C --> I[Developer Tools]
-    
-    D --> J[OpenAI API]
-    D --> K[Anthropic API]
-    D --> L[Local Models]
-    
-    E --> M[SQLite + Embeddings]
-    
-    style B fill:#2B3A67,stroke:#fff,color:#fff
-    style C fill:#3E92CC,stroke:#fff,color:#fff
-    style D fill:#AA6C39,stroke:#fff,color:#fff
-```
-
-</div>
-
-**Core Components:**
-- **🧠 AstrOS Agent** - Python-based orchestrator running as systemd service
-- **🔌 Plugin System** - Modular architecture for extensible functionality
-- **🤖 AI Adapters** - Abstraction layer for different AI providers
-- **💾 Local RAG** - Privacy-focused local knowledge storage
-- **🖥️ Desktop Integration** - GNOME Shell extensions and native UI components
-
----
-
-## 🌟 Why AstrOS?
-
-<table>
-<tr>
-<td width="33%">
-
-### 🎯 For End Users
-- **Intuitive Computing** - No more memorizing commands or navigating complex menus
-- **Intelligent Automation** - Your computer learns and adapts to your workflow
-- **Privacy Control** - Decide what data leaves your device
-- **Productivity Boost** - AI-powered workflows that save real time
-
-</td>
-<td width="33%">
-
-### 👨‍💻 For Developers  
-- **Modern Stack** - Python-first with contemporary tools and practices
-- **Plugin Architecture** - Easy-to-build extensions with simple APIs
-- **Open Source** - No black boxes, everything is auditable
-- **Ubuntu Foundation** - Familiar development environment
-
-</td>
-<td width="33%">
-
-### 🏢 For Organizations
-- **Enterprise Security** - Audit-ready, compliant AI integration
-- **Cost Effective** - Open source with optional commercial support
-- **Customizable** - Tailor AI features to organizational needs
-- **Future Proof** - Built on established standards
-
-</td>
-</tr>
-</table>
+📖 **[Development Guide →](docs/CONTRIBUTING.md)**
 
 ---
 
@@ -225,55 +339,25 @@ graph TB
 
 We're building the future of computing, and we need your help! AstrOS is a community-driven project welcoming contributors of all skill levels.
 
-### 🔑 Contributors: Bring Your Own API Key
-Contributors can enhance AstrOS with their own OpenAI or OpenRouter API keys for advanced testing and development. See our [API Setup Guide](API_SETUP.md) and [Contributing Guide](CONTRIBUTING_API.md) for details.
+### 🎯 Current Focus Areas
 
-### 🎯 Ways to Contribute
-
-<table>
-<tr>
-<td>
-
-**🐛 Found a Bug?**
-- [Report Issues](https://github.com/AstrOS-Project/astros-core/issues/new?template=bug_report.md)
-- Help with bug verification
-- Test on different hardware
-
-</td>
-<td>
-
-**💡 Have Ideas?**
-- [Request Features](https://github.com/AstrOS-Project/astros-core/issues/new?template=feature_request.md)
-- Join design discussions
-- Propose improvements
-
-</td>
-<td>
-
-**🔧 Want to Code?**
-- Check [Good First Issues](https://github.com/search?q=org%3AAstrOS-Project+label%3A%22good+first+issue%22&type=issues)
-- Build awesome plugins
-- Improve core functionality
-
-</td>
-</tr>
-</table>
-
-### 🏷️ Current Focus Areas
-
-- ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white) **Core Agent Development** - Python developers for main AstrOS agent
-- ![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=black) **UI Components** - Frontend developers for user interfaces  
-- ![Ubuntu](https://img.shields.io/badge/-Ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white) **System Integration** - Linux enthusiasts for Ubuntu customization
-- ![AI](https://img.shields.io/badge/-AI/ML-FF6B6B?style=flat&logo=tensorflow&logoColor=white) **AI Features** - ML engineers for model integration
-- ![Docs](https://img.shields.io/badge/-Documentation-4285F4?style=flat&logo=googledocs&logoColor=white) **Documentation** - Technical writers for user guides
+| Area | Skills Needed | Issues |
+|------|---------------|--------|
+| ISO Builder | Bash, Linux internals | [#issues/iso](#) |
+| AI Agent | Python, AI/ML | [#issues/agent](#) |
+| Desktop Environment | JavaScript, GNOME | [#issues/desktop](#) |
+| Plugin Development | Python, APIs | [#issues/plugins](#) |
+| Voice System | Audio processing, ML | [#issues/voice](#) |
+| Documentation | Technical writing | [#issues/docs](#) |
+| Testing | QA, automation | [#issues/testing](#) |
 
 ### 📋 Getting Started
 
-1. **[Quick Start Guide](GETTING_STARTED.md)** - Set up AstrOS in 5 minutes
-2. **[API Setup Guide](API_SETUP.md)** - Configure OpenAI/OpenRouter for enhanced AI
-3. **[Contributing Guide](CONTRIBUTING_API.md)** - Essential information for new contributors
-4. **Join our [Discord Community](https://discord.gg/astros)** - Chat with maintainers and other contributors  
-5. **Pick an Issue** - Start with issues labeled [`good first issue`](https://github.com/search?q=org%3ACorOrganizations+label%3A%22good+first+issue%22&type=issues)
+1. **[Quick Start Guide](docs/GETTING_STARTED.md)** - Set up AstrOS in 5 minutes
+2. **[API Setup Guide](docs/API_SETUP.md)** - Configure OpenAI/OpenRouter for enhanced AI
+3. **[Contributing Guide](docs/CONTRIBUTING.md)** - Essential information for new contributors
+4. **Join our [Discord Community](https://discord.gg/9qQstuyt)** - Chat with maintainers and other contributors  
+5. **Pick an Issue** - Start with issues labeled [`good first issue`](https://github.com/search?q=org%3ACoreOrganizations+label%3A%22good+first+issue%22&type=issues)
 
 ---
 
@@ -289,16 +373,17 @@ Contributors can enhance AstrOS with their own OpenAI or OpenRouter API keys for
 
 </div>
 
-### 🎯 Current Milestone: **Foundation Phase** (Q1 2025)
+### 🎯 Current Phase: Alpha Development (v0.1.x)
 
-- ✅ Project architecture defined
-- ✅ Core repositories created  
-- ✅ Community guidelines established
-- 🔄 **In Progress**: Core Python agent development
-- 🔄 **In Progress**: First Ubuntu ISO build
-- ⏳ **Next**: Plugin system implementation
+- ✅ Architecture finalized
+- ✅ ISO build pipeline working
+- 🔄 Core AI agent (70% complete)
+- 🔄 Desktop environment (40% complete)
+- 🔄 Plugin system (60% complete)
+- ⏳ Voice control (planned)
+- ⏳ First alpha release (Q1 2025)
 
-[📅 View Full Roadmap](ROADMAP.md)
+[📅 View Detailed Roadmap](ROADMAP.md)
 
 ---
 
@@ -315,8 +400,9 @@ Contributors can enhance AstrOS with their own OpenAI or OpenRouter API keys for
 ### 🪽 Get Help
 
 - **💬 Community Chat**: Real-time help on [Discord](https://discord.gg/9qQstuyt)
-- **🐛 Bug Reports**: [GitHub Issues](https://github.com/AstrOS-Project/astros-core/issues)
-- **📖 Documentation**: [docs.astros.org](https://docs.astros.org)
+- **🐛 Bug Reports**: [GitHub Issues](https://github.com/CoreOrganizations/AstrOS/issues)
+- **� Email**: aiastros2025@gmail.com
+- **�📖 Documentation**: [docs.astros.org](https://docs.astros.org)
 
 ---
 
@@ -336,7 +422,7 @@ We take security seriously. If you discover a security vulnerability, please:
 - **DO NOT** create a public GitHub issue
 - Email us at: **aiastros2025@gmail.com**
 - Include detailed reproduction steps
-- We'll acknowledge
+- We'll acknowledge within 48 hours
 
 [🔒 View our Security Policy](SECURITY.md)
 
@@ -346,19 +432,19 @@ We take security seriously. If you discover a security vulnerability, please:
 
 AstrOS is built on the shoulders of giants. Special thanks to:
 
-- **Ubuntu Team** - For providing the solid foundation we build upon
-- **Python Community** - For the incredible ecosystem and tools
-- **AI Research Community** - For advancing the field that makes AstrOS possible
-- **Open Source Contributors** - For believing in the power of collaborative development
-- **Early Adopters & Testers** - For helping us build something amazing
+- **Ubuntu/Canonical** - Stable Linux foundation
+- **GNOME Project** - Desktop environment
+- **Ollama** - Local AI model runtime
+- **Python Community** - Core development language
+- **Open Source Community** - Making this possible
 
 ---
 
 <div align="center">
 
-### 🚀 Ready to Build the Future?
+### 🚀 Ready to Build the AI-Powered OS?
 
-**[⭐ Star us on GitHub](https://github.com/AstrOS-Project)** • **[🤝 Join the Community](https://discord.gg/astros)** • **[📝 Start Contributing](CONTRIBUTING.md)**
+**[⭐ Star us on GitHub](https://github.com/CoreOrganizations/AstrOS)** • **[🤝 Join the Community](https://discord.gg/9qQstuyt)** • **[📝 Start Contributing](docs/CONTRIBUTING.md)**
 
 ---
 
