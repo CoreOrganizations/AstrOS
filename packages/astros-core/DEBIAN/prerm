@@ -1,0 +1,22 @@
+#!/bin/bash
+# Pre-removal script for AstrOS Core
+
+set -e
+
+# Get the user
+if [ -n "$SUDO_USER" ]; then
+    SERVICE_USER="$SUDO_USER"
+else
+    SERVICE_USER=$(getent passwd | awk -F: '$3 >= 1000 && $3 < 65000 { print $1 }' | head -n1)
+    [ -z "$SERVICE_USER" ] && SERVICE_USER="root"
+fi
+
+echo "🛑 Stopping AstrOS service..."
+
+# Stop and disable service
+systemctl stop "astros-agent@$SERVICE_USER" 2>/dev/null || true
+systemctl disable "astros-agent@$SERVICE_USER" 2>/dev/null || true
+
+echo "✅ AstrOS service stopped"
+
+exit 0

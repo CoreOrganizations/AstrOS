@@ -1,0 +1,109 @@
+#!/bin/bash
+# Post-installation script for AstrOS Core
+
+set -e
+
+echo "🚀 Setting up AstrOS Agent..."
+
+# Get the user who will use the service (not root if installing via sudo)
+if [ -n "$SUDO_USER" ]; then
+    INSTALL_USER="$SUDO_USER"
+    USER_HOME=$(eval echo ~$SUDO_USER)
+else
+    # Find first non-root user with home directory
+    INSTALL_USER=$(getent passwd | awk -F: '$3 >= 1000 && $3 < 65000 { print $1 }' | head -n1)
+    if [ -z "$INSTALL_USER" ]; then
+        INSTALL_USER="root"
+        USER_HOME="/root"
+    else
+        USER_HOME=$(eval echo ~$INSTALL_USER)
+    fi
+fi
+
+echo "📝 Installing for user: $INSTALL_USER"
+echo "🏠 Home directory: $USER_HOME"
+
+# Create user directories
+mkdir -p "$USER_HOME/.config/astros"
+mkdir -p "$USER_HOME/.local/share/astros"
+
+# Set up virtual environment
+echo "🐍 Setting up Python virtual environment..."
+if [ ! -d "$USER_HOME/.local/share/astros/venv" ]; then
+    python3 -m venv "$USER_HOME/.local/share/astros/venv"
+    
+    # Install dependencies
+    echo "📦 Installing Python dependencies..."
+    "$USER_HOME/.local/share/astros/venv/bin/pip" install --upgrade pip --quiet
+    "$USER_HOME/.local/share/astros/venv/bin/pip" install httpx openai python-dotenv --quiet
+    
+    echo "✅ Virtual environment created"
+fi
+
+# Create default configuration if doesn't exist
+if [ ! -f "$USER_HOME/.config/astros/agent.env" ]; then
+    echo "📝 Creating default configuration..."
+    cat > "$USER_HOME/.config/astros/agent.env" << 'EOF'
+# AstrOS Agent Configuration
+# Get your free API key at: https://openrouter.ai/keys
+
+ASTROS_API_KEY=your-api-key-here
+ASTROS_BASE_URL=https://openrouter.ai/api/v1
+
+# Model Configuration
+ASTROS_AI_MODEL__NAME=mistralai/ministral-8b
+ASTROS_AI_MODEL__MAX_TOKENS=2048
+ASTROS_AI_MODEL__TEMPERATURE=0.7
+ASTROS_AI_MODEL__TIMEOUT=60
+
+# Logging
+LOG_LEVEL=INFO
+EOF
+    
+    chmod 600 "$USER_HOME/.config/astros/agent.env"
+    echo "⚠️  Please configure your API key in: $USER_HOME/.config/astros/agent.env"
+fi
+
+# Fix ownership if installed via sudo
+if [ -n "$SUDO_USER" ]; then
+    chown -R "$SUDO_USER:$SUDO_USER" "$USER_HOME/.config/astros"
+    chown -R "$SUDO_USER:$SUDO_USER" "$USER_HOME/.local/share/astros"
+fi
+
+# Reload systemd
+systemctl daemon-reload
+
+# Check if we should enable the service
+if [ -f "$USER_HOME/.config/astros/agent.env" ] && grep -q "your-api-key-here" "$USER_HOME/.config/astros/agent.env"; then
+    echo ""
+    echo "================================================"
+    echo "⚠️  CONFIGURATION NEEDED"
+    echo "================================================"
+    echo ""
+    echo "To start using AstrOS:"
+    echo "1. Get a free API key from: https://openrouter.ai/keys"
+    echo "2. Edit the config: nano $USER_HOME/.config/astros/agent.env"
+    echo "3. Enable the service: sudo systemctl enable astros-agent@$INSTALL_USER"
+    echo "4. Start the service: sudo systemctl start astros-agent@$INSTALL_USER"
+    echo ""
+else
+    # API key configured, enable and start
+    echo "🚀 Enabling AstrOS service..."
+    systemctl enable "astros-agent@$INSTALL_USER"
+    systemctl start "astros-agent@$INSTALL_USER" || true
+    
+    echo ""
+    echo "================================================"
+    echo "✅ AstrOS Agent Installed Successfully!"
+    echo "================================================"
+    echo ""
+    echo "Service Status:"
+    systemctl status "astros-agent@$INSTALL_USER" --no-pager || true
+    echo ""
+fi
+
+echo "📚 Documentation: https://github.com/CoreOrganizations/AstrOS"
+echo "💬 Support: Discord at https://discord.gg/9qQstuyt"
+echo ""
+
+exit 0

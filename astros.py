@@ -13,8 +13,18 @@ from typing import Optional
 # Load environment variables from .env file
 try:
     from dotenv import load_dotenv
-    load_dotenv()
-    print("✅ Environment variables loaded from .env file")
+    
+    # Try loading from user config directory first
+    config_file = os.path.join(os.path.expanduser('~'), '.config', 'astros', 'agent.env')
+    if os.path.exists(config_file):
+        load_dotenv(config_file)
+        print("✅ Environment variables loaded from .env file")
+    elif os.path.exists('.env'):
+        load_dotenv()
+        print("✅ Environment variables loaded from .env file")
+    else:
+        print("⚠️  No configuration file found")
+        print(f"💡 Create config at: {config_file}")
 except ImportError:
     print("⚠️  python-dotenv not installed. Install with: pip install python-dotenv")
 

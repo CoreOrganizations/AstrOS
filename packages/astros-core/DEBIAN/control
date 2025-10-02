@@ -1,0 +1,26 @@
+Package: astros-core
+Version: 0.1.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Depends: python3 (>= 3.10), python3-venv, python3-pip, systemd
+Maintainer: AstrOS Team <aiastros2025@gmail.com>
+Description: AstrOS AI Agent - Your Intelligent Desktop Assistant
+ AstrOS is an intelligent AI assistant that integrates seamlessly with
+ your Ubuntu desktop. It provides natural language interaction powered
+ by MistralAI's Ministral-8B model.
+ .
+ Features:
+  - Natural language conversation
+  - System-wide integration
+  - Auto-start on boot
+  - Secure API key management
+  - Low resource usage (< 50MB RAM)
+  - Fast response times (< 2s)
+ .
+ This package includes:
+  - AI agent daemon
+  - Systemd service configuration
+  - Command-line interface
+  - First-boot setup wizard
+Homepage: https://github.com/CoreOrganizations/AstrOS

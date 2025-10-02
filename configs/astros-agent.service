@@ -1,0 +1,43 @@
+[Unit]
+Description=AstrOS AI Agent Service
+Documentation=https://github.com/CoreOrganizations/AstrOS
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=%i
+Group=%i
+
+# Environment - handle both /home/user and /root
+Environment="PYTHONUNBUFFERED=1"
+EnvironmentFile=-/home/%i/.config/astros/agent.env
+
+# Working directory and execution  
+WorkingDirectory=/usr/lib/astros/agent
+ExecStart=/usr/lib/astros/agent/start_daemon.sh %i
+
+# Restart configuration
+Restart=always
+RestartSec=10
+StartLimitInterval=5min
+StartLimitBurst=3
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=astros-agent
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/%i/.config/astros /home/%i/.local/share/astros
+
+# Resource limits
+MemoryMax=512M
+CPUQuota=50%
+
+[Install]
+WantedBy=default.target
