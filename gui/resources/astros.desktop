@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=AstrOS
+GenericName=AI Assistant
+Comment=Your intelligent desktop AI assistant
+Exec=/usr/bin/astros-gui
+Icon=org.astros.desktop
+Terminal=false
+Categories=Utility;Development;
+Keywords=AI;Assistant;Chat;
+StartupNotify=true
+StartupWMClass=AstrOS

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# AstrOS GUI Launcher - Uses system Python with virtualenv modules
+
+VENV_PATH="$HOME/.local/share/astros/venv"
+GUI_DIR="$(dirname "$0")/gui"
+
+# Check if virtualenv exists
+if [ ! -d "$VENV_PATH" ]; then
+    echo "❌ AstrOS virtual environment not found!"
+    echo "💡 Install astros-core package first: sudo dpkg -i packages/astros-core.deb"
+    exit 1
+fi
+
+# Check if GUI directory exists
+if [ ! -d "$GUI_DIR" ]; then
+    echo "❌ GUI directory not found at: $GUI_DIR"
+    exit 1
+fi
+
+# Check DISPLAY variable
+if [ -z "$DISPLAY" ]; then
+    echo "⚠️  DISPLAY not set"
+    if grep -qi microsoft /proc/version; then
+        echo "💡 For WSL2, run:"
+        echo "   export DISPLAY=\$(cat /etc/resolv.conf | grep nameserver | awk '{print \$2}'):0"
+    fi
+    exit 1
+fi
+
+# Use system Python (has PyGObject) with virtualenv site-packages in PYTHONPATH
+echo "� Launching AstrOS GUI..."
+export PYTHONPATH="$VENV_PATH/lib/python$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')/site-packages:$PYTHONPATH"
+exec /usr/bin/python3 "$GUI_DIR/app.py" "$@"
